@@ -1,11 +1,12 @@
 import 'package:drift/drift.dart';
-import 'package:money_managment/data/tables/categories.dart';
+import 'categories.dart';
 
 class Operations extends Table {
   IntColumn get id => integer().nullable().autoIncrement()();
   TextColumn get type => text()();
   IntColumn get amount => integer()();
   DateTimeColumn get date => dateTime()();
+  DateTimeColumn get endDate => dateTime().nullable()();
   TextColumn get description => text()();
   IntColumn get catId => integer().references(Categories, #id)();
 

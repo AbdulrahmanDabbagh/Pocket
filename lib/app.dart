@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
-import 'package:money_managment/home/home_page.dart';
+import 'package:money_managment/app/core/values/translation/app_translation.dart';
+import 'package:money_managment/app/router/app_pages.dart';
+
+import 'app/core/values/app_themes.dart';
+import 'app/modules/home/view/home_page.dart';
 
 class App extends StatelessWidget {
   const App({Key? key}) : super(key: key);
@@ -8,7 +12,14 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      home: homePage(),
+      getPages: AppPages.pages,
+      initialRoute: AppPages.initialRoute,
+      translations: AppTranslation(),
+      translationsKeys: AppTranslation().keys,
+      locale: AppTranslation.currentLocale,
+      theme: AppTheme.theme,
+      themeMode: AppTheme.isDark?ThemeMode.dark:ThemeMode.light,
+      debugShowCheckedModeBanner: false,
     );
   }
 }

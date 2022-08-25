@@ -1,38 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:get/get.dart';
-import 'package:intl/intl.dart';
-import 'package:money_managment/data/db/db.dart';
-import 'package:money_managment/home/home_controller.dart';
-import 'package:money_managment/home/operations_card.dart';
-
-import '../main.dart';
-
-class homePage extends StatelessWidget {
-  const homePage({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    final controller = Get.put(HomeController());
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("Operations"),
-      ),
-      body: StreamBuilder<List<Operation>>(
-        stream: db.watchOperations,
-        builder: (context, snapshot) {
-          final operations = snapshot.data ?? [];
-          return ListView.builder(
-            itemCount: operations.length,
-              itemBuilder: (context, index){
-                return OperationsCard(operation: operations[index]);
-              },
-          );
-        }
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: (){
-          final addForm=GlobalKey<FormState>();
+final addForm=GlobalKey<FormState>();
           late String amount;
           late String description;
           late String type;
@@ -47,6 +13,75 @@ class homePage extends StatelessWidget {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
+                  TextFormField(
+                    decoration: const InputDecoration(
+                      hintText: "amount",
+                    ),
+                    inputFormatters: [
+                      FilteringTextInputFormatter.digitsOnly
+                    ],
+                    keyboardType: TextInputType.number,
+                    onChanged: (v) => amount = v,
+                    validator: (String? value){
+                      if(value == null || value.isEmpty){
+                        return "required";
+                      }
+                      return null;
+                    },
+                  ),
+
+                  Obx(() {
+                    return TextButton(
+                      child: Text(DateFormat('yyyy-MM-dd').format(controller.selectedDate.value)),
+                      onPressed: () async{
+                        final date = await showDatePicker(
+                            context: context,
+                            initialDate: controller.selectedDate.value,
+                            firstDate: DateTime(2000),
+                            lastDate: DateTime(2100)
+                        );
+                        if(date != null){
+                          controller.selectedDate(date);
+                        }
+                      },
+                    );
+                  }),
+
+                  DropdownButtonFormField<String>(
+                    hint: const Text("select a type"),
+                    isExpanded: true,
+                    validator: (type){
+                      if(type == null){
+                        return "required";
+                      }
+                      return null;
+                    },
+                    items: const [
+                      DropdownMenuItem(
+                        value: "Income",
+                        child: Text(AppString.Income.tr),
+                      ),
+                      DropdownMenuItem(
+                        value: "Outcome",
+                        child: Text(AppString.Outcome.tr),
+                      ),
+                      DropdownMenuItem(
+                        value: "Creditor ",
+                        child: Text(AppString.Creditor.tr),
+                      ),
+                      DropdownMenuItem(
+                        value: "Debtor",
+                        child: Text(AppString.Debtor.tr),
+                      ),
+                    ],
+                    onChanged: (String? string){
+                      if(string != null) {
+                        type = string;
+                      }
+                    },
+
+                  ),
+
                   StreamBuilder<List<Categorie>>(
                       stream: db.watchCategories(),
                       builder: (_,snapshot){
@@ -122,39 +157,11 @@ class homePage extends StatelessWidget {
                         );
                       }
                   ),
+
+
                   TextFormField(
-                    decoration: const InputDecoration(
-                      hintText: "amount",
-                    ),
-                    inputFormatters: [
-                      FilteringTextInputFormatter.digitsOnly
-                    ],
-                    keyboardType: TextInputType.number,
-                    onChanged: (v) => amount = v,
-                    validator: (String? value){
-                      if(value == null || value.isEmpty){
-                        return "required";
-                      }
-                      return null;
-                    },
-                  ),
-                  Obx(() {
-                    return TextButton(
-                      child: Text(DateFormat('yyyy-MM-dd').format(controller.selectedDate.value)),
-                      onPressed: () async{
-                        final date = await showDatePicker(
-                            context: context,
-                            initialDate: controller.selectedDate.value,
-                            firstDate: DateTime(2000),
-                            lastDate: DateTime(2100)
-                        );
-                        if(date != null){
-                          controller.selectedDate(date);
-                        }
-                      },
-                    );
-                  }),
-                  TextFormField(
+                    keyboardType: TextInputType.multiline,
+                    maxLines: null,
                     decoration: const InputDecoration(
                       hintText: "Description",
                     ),
@@ -165,78 +172,8 @@ class homePage extends StatelessWidget {
                       }
                       return null;
                     },
-                  ),
-                  DropdownButtonFormField<String>(
-                    hint: const Text("select a type"),
-                    isExpanded: true,
-                    validator: (type){
-                      if(type == null){
-                        return "required";
-                      }
-                      return null;
-                    },
-                    items: const [
-                      DropdownMenuItem(
-                        value: "Income",
-                        child: Text("Income"),
-                      ),
-                      DropdownMenuItem(
-                        value: "Outcome",
-                        child: Text("Outcome"),
-                      ),
-                      DropdownMenuItem(
-                        value: "Creditor ",
-                        child: Text("Creditor "),
-                      ),
-                      DropdownMenuItem(
-                        value: "Debtor",
-                        child: Text("Debtor"),
-                      ),
-                    ],
-                    onChanged: (String? string){
-                      if(string != null) {
-                        type = string;
-                      }
-                    },
 
                   ),
-                  // Obx((){
-                  //   return DropdownButtonFormField<String>(
-                  //     hint: const Text("select a type"),
-                  //     isExpanded: true,
-                  //     validator: (type){
-                  //       if(type == null){
-                  //         return "required";
-                  //       }
-                  //       return null;
-                  //     },
-                  //     items: const [
-                  //       DropdownMenuItem(
-                  //         value: "Income",
-                  //         child: Text("Income"),
-                  //       ),
-                  //       DropdownMenuItem(
-                  //         value: "Outcome",
-                  //         child: Text("Outcome"),
-                  //       ),
-                  //       DropdownMenuItem(
-                  //         value: "Creditor ",
-                  //         child: Text("Creditor "),
-                  //       ),
-                  //       DropdownMenuItem(
-                  //         value: "Debtor",
-                  //         child: Text("Debtor"),
-                  //       ),
-                  //     ],
-                  //     onChanged: (String? string){
-                  //         if(string != null) {
-                  //           type = string;
-                  //         }
-                  //       },
-                  //
-                  //   );
-                  // }
-                  // ),
                   ElevatedButton(
                     child: Text("Add"),
                     onPressed: (){
@@ -255,11 +192,5 @@ class homePage extends StatelessWidget {
                 ],
               ),
             ),
-            )
+            ),isScrollControlled: true
           );
-        },
-        child: Icon(Icons.add),
-      ),
-    );
-  }
-}

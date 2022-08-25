@@ -1,0 +1,36 @@
+
+import '../../app_strings.dart';
+
+final arSY = <String, String>{
+  AppString.Search : "بحث",
+  AppString.Payoff : "تسديدات",
+  AppString.Earning : "استيفاءات",
+  AppString.Outcome : "مدفوعات",
+  AppString.Income : "مقبوضات",
+  AppString.Creditor : "دائن",
+  AppString.Debtor : "مدين",
+  AppString.Details : "تفاصيل",
+  AppString.Delete : "حذف",
+  AppString.Edit : "تعديل",
+  AppString.Dashboard : "لوحة التحكم",
+  AppString.Filter : "تصفية",
+  AppString.Cancel : "إلغاء",
+  AppString.Apply : "تطبيق",
+  AppString.TotalOutcome : "اجمالي المدفوعات",
+  AppString.TotalIncome : "اجمالي المقبوضات",
+  AppString.TotalDept : "اجمالي الدين",
+  AppString.TotalCreditor : "اجمالي المدين",
+  AppString.TotalCash : "الرصيد النهائي",
+  AppString.Budget : "الميزانية",
+  AppString.Language : "English",
+  AppString.addOperation : "إضافة عملية",
+  AppString.amount : "المبلغ",
+  AppString.selectAType : "اختر نوع العملية",
+  AppString.selectACategory : "اختر صنف العملية",
+  AppString.description : "الوصف",
+  AppString.addNewCategory : "إضافة صنف جديد",
+  AppString.categoryName : "اسم الصنف",
+  AppString.thiscategoryIsExist : "هذا الصنف موجود بالفعل",
+  AppString.add : "إضافة",
+
+};

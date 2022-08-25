@@ -2,10 +2,14 @@ import 'dart:io';
 
 import 'package:drift/drift.dart';
 import 'package:drift/native.dart';
-import 'package:money_managment/data/tables/categories.dart';
-import 'package:money_managment/data/tables/operations_t.dart';
+import 'package:get/get_rx/src/rx_types/rx_types.dart';
+import 'package:money_managment/app/modules/filter/controller/filter_controller.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:path/path.dart' as p;
+
+import '../models/filter.dart';
+import '../tables/categories.dart';
+import '../tables/operations_t.dart';
 
 part 'db.g.dart';
 
@@ -16,7 +20,7 @@ LazyDatabase _openConnection() {
     // for your app.
     final dbFolder = await getApplicationDocumentsDirectory(); // data/aaa/a/affff/
     final file = File(p.join(dbFolder.path, 'db.sqlite')); // file(data/aaa/a/affff/db.sqlite);
-    return NativeDatabase(file);
+    return NativeDatabase(file,logStatements: true);
   });
 }
 
@@ -31,12 +35,19 @@ class MyDatabase extends _$MyDatabase {
   Future<int> removeOperation(Operation operation) => delete(operations).delete(operation);
   Future<int> removeCategory(Categorie category) => delete(categories).delete(category);
 
+  Future<int> editOperation(Operation operation) => update(operations).write(operation);
+  Future<int> editCategory(Categorie category) => update(categories).write(category);
+
   Stream<List<Categorie>> watchCategories() => select(categories).watch();
-  Stream<List<Operation>> get watchOperations => select(operations).watch();
+
+  Stream<List<Operation>> watchOperations(String type) => (select(operations)..where((tbl) => tbl.type.equals(type))).watch();
+  Future<List<Operation>> getAllOperations(Filter filter) => select(operations).get();
 
   Future<Categorie> getCategory(int id){
     return (select(categories)..where((tbl) => tbl.id.equals(id))).getSingle();
   }
+
+
   // you should bump this number whenever you change or add a table definition.
   // Migrations are covered later in the documentation.
   @override
