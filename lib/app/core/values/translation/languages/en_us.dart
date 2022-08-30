@@ -32,4 +32,10 @@ final enUS = <String, String>{
   AppString.categoryName : "Category name",
   AppString.thiscategoryIsExist : "this category is exist",
   AppString.add : "Add",
+  AppString.to : "To",
+  AppString.from : "From",
+  AppString.required : "Required",
+  AppString.invalidAmount : "Invalid amount",
+  AppString.remain : "Remain",
+
 };

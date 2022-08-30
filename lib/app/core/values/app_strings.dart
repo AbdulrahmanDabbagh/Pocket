@@ -1,3 +1,5 @@
+import 'package:flutter/src/widgets/framework.dart';
+
 class AppString{
   static const arabic = "العربية";
   static const arCode = "ar";
@@ -38,5 +40,10 @@ class AppString{
   static const thiscategoryIsExist = "this category is exist";
   static const description = "Description";
   static const add = "Add";
+  static const from = "From";
+  static const to = "To";
+  static const required = "Required";
+  static const invalidAmount = "Invalid amount";
+  static const remain = "Remain";
 
 }

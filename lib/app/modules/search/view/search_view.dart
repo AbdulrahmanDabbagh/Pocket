@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:get/get_instance/get_instance.dart';
 import 'package:money_managment/app/core/values/app_constant.dart';
 import 'package:money_managment/app/core/values/app_strings.dart';
 import 'package:money_managment/app/modules/search/controller/search_controller.dart';
-
-import '../../../components/text_field_widget.dart';
+import '../../../../main.dart';
 import '../../../core/values/app_colors.dart';
+import '../../../data/db/db.dart';
+import '../../home/view/operations_card.dart';
 
 class SearchView extends GetView<SearchController> {
   const SearchView({Key? key}) : super(key: key);
@@ -19,50 +18,52 @@ class SearchView extends GetView<SearchController> {
       body: SafeArea(
         child: Padding(
           padding: AppConstant.pagePadding,
-          child: Column(
-            children: [
-              Row(
+          child: Obx((){
+              return Column(
                 children: [
-                  IconButton(
-                    onPressed: () => Get.back(),
-                    icon: Icon(Icons.arrow_back_rounded)
-                  ),
-                  Expanded(
-                    child:
-                    Obx((){
-                        return TextFormField(
-                          controller: controller.textSearchController.value,
-                          decoration: InputDecoration(
-                            hintText: AppString.Search.tr,
-                            suffixIcon: controller.searchText.value.isNotEmpty?
-                            IconButton(
-                              onPressed: (){
-                                controller.textSearchController.value.clear();
-                                controller.searchText("");
-                                },
-                              icon: Icon(Icons.clear),
+                  Row(
+                    children: [
+                      IconButton(
+                        onPressed: () => Get.back(),
+                        icon: Icon(Icons.arrow_back_rounded)
+                      ),
+                      Expanded(
+                        child:
+                        TextFormField(
+                              controller: controller.textSearchController,
+                              decoration: InputDecoration(
+                                hintText: AppString.Search.tr,
+                                suffixIcon: controller.searchText.isNotEmpty?
+                                IconButton(
+                                  onPressed: (){
+                                    controller.textSearchController.clear();
+                                    controller.searchText("");
+                                    },
+                                  icon: Icon(Icons.clear),
+                                )
+                                    :null
+                              ),
+                              onChanged: (v) {
+                                controller.searchText.value=v;
+                                controller.search();
+                              },
                             )
-                                :null
-                          ),
-                          onChanged: (v)=>controller.searchText.value=v,
-                        );
-                      }
-                    )
-                    // TextFieldWidget(
-                    //   hint: AppString.Search.tr,
-                    //   suffixIcon:
-                    //   IconButton(
-                    //       onPressed: (){
-                    //         controller.searchText?.value = "";
-                    //       },
-                    //       icon: Icon(Icons.clear),
-                    //   ),
-                    //   onChanged: (v)=>controller.searchText?.value=v,
-                    // ),
+                      ),
+                      const SizedBox(width: AppConstant.paddingValue/2),
+                    ],
+                  ),
+                  const SizedBox(height: AppConstant.paddingValue),
+                  Expanded(
+                    child: ListView.builder(
+                      itemCount: controller.operations.length,
+                      itemBuilder: (context, index){
+                        return OperationsCard(operation: controller.operations[index]);
+                      },
+                    ),
                   ),
                 ],
-              )
-            ],
+              );
+            }
           ),
         ),
       ),

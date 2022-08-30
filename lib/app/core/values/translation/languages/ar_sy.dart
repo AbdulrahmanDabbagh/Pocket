@@ -32,5 +32,10 @@ final arSY = <String, String>{
   AppString.categoryName : "اسم الصنف",
   AppString.thiscategoryIsExist : "هذا الصنف موجود بالفعل",
   AppString.add : "إضافة",
+  AppString.to : "الى",
+  AppString.from : "من",
+  AppString.required : "مطلوب",
+  AppString.invalidAmount : "قيمة خاطئة",
+  AppString.remain : "الباقي",
 
 };

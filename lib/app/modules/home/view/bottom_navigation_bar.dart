@@ -21,22 +21,22 @@ class BNB extends GetView<HomeController> {
           unselectedItemColor: AppColors.number3,
           items:  [
             BottomNavigationBarItem(
-                icon: ImageIcon(AssetImage('assets/images/outcome.png'),size: 25,),
+                icon: const ImageIcon(AssetImage('assets/images/outcome.png'),size: 25,),
                 label: AppString.Outcome.tr,
                 backgroundColor: AppColors.number2,
             ),
             BottomNavigationBarItem(
-                icon: ImageIcon(AssetImage('assets/images/incomes.png')),
+                icon: const ImageIcon(AssetImage('assets/images/incomes.png')),
                 label: AppString.Income.tr,
                 backgroundColor: AppColors.number2
             ),
             BottomNavigationBarItem(
-                icon: ImageIcon(AssetImage('assets/images/creditor.png')),
+                icon: const ImageIcon(AssetImage('assets/images/creditor.png')),
                 label: AppString.Creditor.tr,
                 backgroundColor: AppColors.number2
             ),
             BottomNavigationBarItem(
-                icon: ImageIcon(AssetImage('assets/images/liability.png')),
+                icon: const ImageIcon(AssetImage('assets/images/liability.png')),
                 label: AppString.Debtor.tr,
                 backgroundColor: AppColors.number2
             ),

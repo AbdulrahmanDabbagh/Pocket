@@ -9,6 +9,7 @@ import 'package:money_managment/app/core/extensions/num_extension.dart';
 import 'package:money_managment/app/core/values/app_colors.dart';
 import 'package:money_managment/app/core/values/app_constant.dart';
 import 'package:money_managment/app/modules/dash_board/controller/dash_board_controller.dart';
+import 'package:money_managment/main.dart';
 
 import '../../../core/values/app_strings.dart';
 
@@ -17,6 +18,7 @@ class DashBoardView extends GetView<DashBoardController> {
 
   @override
   Widget build(BuildContext context) {
+    db.getTotalPaidDebtor();
     return Scaffold(
       appBar: AppBar(
         title: Text(AppString.Dashboard.tr),
@@ -49,14 +51,24 @@ class DashBoardView extends GetView<DashBoardController> {
               Row(
                 children: [
                   Expanded(
-                      child: _InfoCard(
-                          title: AppString.TotalDept.tr,
-                          amount: controller.total(OperationType.Debtor))),
+                      child: FutureBuilder<int?>(
+                        future: db.getTotalPaidDebtor(),
+                        builder: (context, snapshot) {
+                          return _InfoCard(
+                              title: "Total ${OperationType.Debtor.name.tr}",
+                              amount: controller.total(OperationType.Debtor) - (snapshot.data??0));
+                        }
+                      )),
                   const SizedBox(width: AppConstant.paddingValue),
                   Expanded(
-                      child: _InfoCard(
-                          title: AppString.TotalCreditor.tr,
-                          amount: controller.total(OperationType.Creditor))),
+                      child: FutureBuilder<int?>(
+                        future: db.getTotalEarnCreditor(),
+                        builder: (context, snapshot) {
+                          return _InfoCard(
+                              title: "Total ${OperationType.Creditor.name.tr}",
+                              amount: controller.total(OperationType.Creditor) - (snapshot.data??0));
+                        }
+                      )),
                 ],
               ),
               const SizedBox(height: AppConstant.paddingValue),
