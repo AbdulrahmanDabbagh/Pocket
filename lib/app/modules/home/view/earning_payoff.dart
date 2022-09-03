@@ -125,10 +125,10 @@ class EarningPayoff extends GetView<HomeController> {
                             ));
                             // if (operation.type == OperationType.Creditor) {
                             //   db.addOperations(Operation(
-                            //       type: OperationType.Income.name.tr,
+                            //       type: OperationType.Income.name,
                             //       amount: controller.amount,
                             //       date: controller.debtorDate.value,
-                            //       description: operation.catId.toString(),
+                            //       description: AppString.,
                             //       catId: db.searchCategories(operation.type, OperationType.Creditor.name)!=null?db.getCategories(OperationType.Creditor.name) ,
                             //   ));
                             // }

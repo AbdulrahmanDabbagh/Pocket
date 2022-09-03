@@ -45,5 +45,13 @@ class AppString{
   static const required = "Required";
   static const invalidAmount = "Invalid amount";
   static const remain = "Remain";
+  static const total = "Total";
+  static const areYouSure = "Are you sure?";
+  static const sp = "sp";
+  static const paid = "paid";
+  static const unpaid = "unpaid";
+  static const usernameOrEmail = "Username or Email";
+  static const password = "Password";
+  static const login = "Login";
 
 }

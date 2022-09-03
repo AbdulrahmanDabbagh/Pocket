@@ -24,6 +24,14 @@ class DashBoardController extends GetxController{
    return (total(OperationType.Income) + total(OperationType.Creditor)) - (total(OperationType.Outcome) + total(OperationType.Debtor));
   }
 
+  List<Operation> get outcomes {
+   return operations.where((e) => e.type == OperationType.Outcome.name).toList();
+  }
+
+  List<Operation> get incomes {
+   return operations.where((e) => e.type == OperationType.Income.name).toList();
+  }
+
   getOperations() async {
     operations.assignAll(await db.filterOperations(filter));
   }
@@ -35,7 +43,7 @@ class DashBoardController extends GetxController{
   }
 
   filterButton() async {
-    final filter = await Get.dialog(const FilterView(),barrierDismissible: false);
+    final filter = await Get.dialog(FilterView(filter: this.filter),barrierDismissible: false);
     if(filter is Filter){
       this.filter = filter;
       getOperations();

@@ -5,4 +5,5 @@ class AppRoutes{
   static const filter = "/filter";
   static const dash_board = "/dash_board";
   static const add = "/add";
+  static const login = "/login";
 }

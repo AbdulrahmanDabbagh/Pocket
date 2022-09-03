@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:money_managment/app/components/confirm_operation_dialog.dart';
 import 'package:money_managment/app/core/enum/type_enum.dart';
 import 'package:money_managment/app/core/values/app_constant.dart';
 import 'package:money_managment/app/core/values/app_strings.dart';
+import 'package:money_managment/app/core/values/translation/app_translation.dart';
 import 'package:money_managment/app/modules/home/controller/home_controller.dart';
 import 'package:money_managment/app/modules/home/view/details_bottom_sheet.dart';
 import 'package:money_managment/app/modules/home/view/earning_payoff.dart';
@@ -19,12 +21,16 @@ class OperationsCard extends GetView<HomeController> {
   @override
   Widget build(BuildContext context) {
     int remain = 0;
-    return GestureDetector(
+    return GestureDetector (
       onTapDown: (detials) {
+        double start = detials.globalPosition.dx;
+        if(AppTranslation.isArabic){
+          start = MediaQuery.of(context).size.width - start;
+        }
         showMenu(
           context: context,
           position: RelativeRect.fromLTRB(
-              detials.localPosition.dx, detials.globalPosition.dy, detials.localPosition.dx, detials.localPosition.dy),
+              start, detials.globalPosition.dy, start, detials.localPosition.dy),
           items: [
             if ([OperationType.Outcome.name, OperationType.Income.name].contains(operation.type))
               PopupMenuItem(
@@ -56,15 +62,23 @@ class OperationsCard extends GetView<HomeController> {
                 value: 2,
                 child: Text(AppString.Edit.tr),
                 onTap: () async {
-                  await Future.delayed(Duration(milliseconds: 50));
+                  await Future.delayed(const Duration(milliseconds: 50));
                   Get.toNamed(AppRoutes.add, arguments: operation);
                 },
               ),
-            PopupMenuItem(
+            PopupMenuItem (
               value: 3,
               child: Text(AppString.Delete.tr),
-              onTap: () {
-                db.removeOperation(operation);
+              onTap: () async {
+                await Future.delayed(const Duration(milliseconds: 50));
+                Get.dialog(ConfirmOperationDialog(
+                  confirmText: AppString.Delete.tr,
+                  onConfirm: () {
+                    db.removeOperation(operation);
+                    Get.back();
+                  },
+                ));
+                //
               },
             ),
             if ([OperationType.Creditor.name, OperationType.Debtor.name].contains(operation.type))
@@ -73,7 +87,7 @@ class OperationsCard extends GetView<HomeController> {
                 child: Text(controller.currentPage == OperationType.Creditor.name ? AppString.Earning.tr : AppString.Payoff.tr),
                 onTap: () async {
                   await Future.delayed(Duration(milliseconds: 50));
-                  Get.bottomSheet(EarningPayoff(operation, remain));
+                  Get.bottomSheet(EarningPayoff(operation, remain),isScrollControlled: true);
                 },
               ),
           ],

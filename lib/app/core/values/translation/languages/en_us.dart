@@ -37,5 +37,13 @@ final enUS = <String, String>{
   AppString.required : "Required",
   AppString.invalidAmount : "Invalid amount",
   AppString.remain : "Remain",
+  AppString.total : "Total",
+  AppString.areYouSure : "Are you sure?",
+  AppString.sp : "SYP",
+  AppString.paid : "Paid",
+  AppString.unpaid : "Unpaid",
+  AppString.usernameOrEmail : "Username or Email",
+  AppString.password : "Password",
+  AppString.login : "Login",
 
 };

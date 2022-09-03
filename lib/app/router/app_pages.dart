@@ -3,6 +3,8 @@ import 'package:money_managment/app/modules/dash_board/binding/dash_board_bindin
 import 'package:money_managment/app/modules/dash_board/view/dash_board_view.dart';
 import 'package:money_managment/app/modules/home/binding/home_binding.dart';
 import 'package:money_managment/app/modules/home/view/home_page.dart';
+import 'package:money_managment/app/modules/login/binding/login_binding.dart';
+import 'package:money_managment/app/modules/login/view/login_view.dart';
 import 'package:money_managment/app/modules/search/binding/search_binding.dart';
 import 'package:money_managment/app/modules/search/view/search_view.dart';
 import 'package:money_managment/app/modules/splash/binding/splash_binding.dart';
@@ -38,6 +40,11 @@ class AppPages{
       name: AppRoutes.add,
       page: () => const AddView(),
       binding: AddBinding(),
+    ),
+    GetPage(
+      name: AppRoutes.login,
+      page: () => const LoginView(),
+      binding: LoginBinding(),
     ),
   ];
 }

@@ -37,5 +37,12 @@ final arSY = <String, String>{
   AppString.required : "مطلوب",
   AppString.invalidAmount : "قيمة خاطئة",
   AppString.remain : "الباقي",
-
+  AppString.total : "إجمالي",
+  AppString.areYouSure : "هل انت متاكد؟",
+  AppString.sp : "ل.س",
+  AppString.paid : "مسدد",
+  AppString.unpaid : "غير مسدد",
+  AppString.usernameOrEmail : "اسم المستخدم او الايميل",
+  AppString.password : "كلمة السر",
+  AppString.login : "تسجيل الدخول",
 };

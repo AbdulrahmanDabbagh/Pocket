@@ -11,11 +11,12 @@ import '../../../core/values/app_constant.dart';
 import '../../../core/values/app_strings.dart';
 
 class FilterView extends StatelessWidget {
-  const FilterView({Key? key}) : super(key: key);
+  const FilterView({Key? key, required this.filter}) : super(key: key);
+  final Filter filter;
 
   @override
   Widget build(BuildContext context) {
-    final controller = Get.put(FilterController());
+    final controller = Get.put(FilterController(filter));
     return Dialog(
       child: Padding(
         padding: AppConstant.pagePadding,
@@ -25,7 +26,7 @@ class FilterView extends StatelessWidget {
           children: [
             Text(
               AppString.Filter.tr,
-              style: TextStyle(fontSize: 21, fontWeight: FontWeight.bold),
+              style: const TextStyle(fontSize: 21, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 10),
             Obx(() {
@@ -46,7 +47,7 @@ class FilterView extends StatelessWidget {
                           ),
                           child: Center(
                             child: Text(DateFormat('yyyy-MM-dd').format(controller.fromDate.value),
-                                style: TextStyle(color: AppColors.white)),
+                                style: const TextStyle(color: AppColors.white)),
                           ),
                           onPressed: () async {
                             final date = await showDatePicker(
@@ -77,7 +78,7 @@ class FilterView extends StatelessWidget {
                           ),
                           child: Center(
                             child: Text(DateFormat('yyyy-MM-dd').format(controller.endDate.value),
-                                style: TextStyle(color: AppColors.white)),
+                                style: const TextStyle(color: AppColors.white)),
                           ),
                           onPressed: () async {
                             final date = await showDatePicker(
@@ -96,14 +97,14 @@ class FilterView extends StatelessWidget {
                 ],
               );
             }),
-            SizedBox(
+            const SizedBox(
               height: AppConstant.paddingValue,
             ),
-            Text(
+            const Text(
               "Select types",
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
-            SizedBox(
+            const SizedBox(
               height: AppConstant.paddingValue / 2,
             ),
             Wrap(
@@ -163,7 +164,7 @@ class FilterView extends StatelessWidget {
                 ],
               );
             }),
-            SizedBox(
+            const SizedBox(
               height: AppConstant.paddingValue,
             ),
             Row(

@@ -80,13 +80,14 @@ class MyDatabase extends _$MyDatabase {
       }
     }
     if(filter.from != null) {
-      query.where((tbl) => tbl.date.isBetween(Variable<DateTime>(filter.from), Variable<DateTime>(filter.to)));
+      query.where((tbl) => tbl.date.isBetween(Variable<DateTime>(filter.from), Variable<DateTime>(filter.to!.add(Duration(hours: 23,minutes: 59)))));
     }
     if(filter.catIds.isEmpty && filter.types.isNotEmpty){
       query.where((tbl) => tbl.type.isIn(filter.types));
     } else if(filter.catIds.isNotEmpty){
       query.where((tbl) => tbl.catId.isIn(filter.catIds));
     }
+    query.orderBy([(t) => OrderingTerm(expression: t.date)]);
     return query.get();
   }
 

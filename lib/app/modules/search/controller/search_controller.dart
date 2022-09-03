@@ -17,7 +17,7 @@ class SearchController extends GetxController{
   }
 
   filterButton() async {
-    final filter = await Get.dialog(const FilterView());
+    final filter = await Get.dialog(FilterView(filter: this.filter));
     if(filter is Filter){
       this.filter = filter;
       search();
