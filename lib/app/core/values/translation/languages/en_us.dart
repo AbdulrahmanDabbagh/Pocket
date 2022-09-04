@@ -45,5 +45,7 @@ final enUS = <String, String>{
   AppString.usernameOrEmail : "Username or Email",
   AppString.password : "Password",
   AppString.login : "Login",
+  AppString.profile : "Profile",
+  AppString.futureGoals : "Future goals",
 
 };

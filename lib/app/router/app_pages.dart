@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 import 'package:money_managment/app/modules/dash_board/binding/dash_board_binding.dart';
 import 'package:money_managment/app/modules/dash_board/view/dash_board_view.dart';
+import 'package:money_managment/app/modules/dash_board/view/widgets/operation_view.dart';
 import 'package:money_managment/app/modules/home/binding/home_binding.dart';
 import 'package:money_managment/app/modules/home/view/home_page.dart';
 import 'package:money_managment/app/modules/login/binding/login_binding.dart';

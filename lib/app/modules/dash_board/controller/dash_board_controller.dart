@@ -5,6 +5,8 @@ import 'package:money_managment/app/data/db/db.dart';
 import 'package:money_managment/app/data/models/filter.dart';
 import 'package:money_managment/main.dart';
 
+import '../../../router/app_routes.dart';
+
 class DashBoardController extends GetxController{
 
   final operations = <Operation>[].obs;

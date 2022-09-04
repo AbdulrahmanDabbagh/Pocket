@@ -6,6 +6,7 @@ import 'package:money_managment/app/core/values/app_constant.dart';
 import 'package:money_managment/app/modules/dash_board/controller/dash_board_controller.dart';
 import 'package:money_managment/app/modules/dash_board/view/widgets/bar_chart_widget.dart';
 import 'package:money_managment/app/modules/dash_board/view/widgets/line_chart_widget.dart';
+import 'package:money_managment/app/modules/dash_board/view/widgets/operation_view.dart';
 import 'package:money_managment/app/modules/dash_board/view/widgets/rect_card.dart';
 import 'package:money_managment/app/modules/dash_board/view/widgets/sqaure_info_card.dart';
 import 'package:money_managment/main.dart';
@@ -40,46 +41,66 @@ class DashBoardView extends GetView<DashBoardController> {
             const SizedBox(height: AppConstant.paddingValue),
             Row(
               children: [
-                Expanded(child: SquareInfoCard(title: AppString.TotalIncome.tr, amount: controller.total(OperationType.Income))),
+                Expanded(
+                  child: GestureDetector(
+                      onTap: () {
+                        Get.to(const OperationView(OperationType.Income));
+                      },
+                      child: SquareInfoCard(title: AppString.TotalIncome.tr, amount: controller.total(OperationType.Income))),
+                ),
                 const SizedBox(width: AppConstant.paddingValue),
                 Expanded(
-                    child: SquareInfoCard(title: AppString.TotalOutcome.tr, amount: controller.total(OperationType.Outcome))),
+                  child: GestureDetector(
+                    onTap: () {
+                      Get.to(const OperationView(OperationType.Outcome));
+                    },
+                    child: SquareInfoCard(title: AppString.TotalOutcome.tr, amount: controller.total(OperationType.Outcome)),
+                  ),
+                ),
               ],
             ),
             const SizedBox(height: AppConstant.paddingValue),
-            FutureBuilder<int?>(
-                future: db.getTotalPaidDebtor(),
-                builder: (context, snapshot) {
-                  return RectCard(
-                    title: "${AppString.total.tr} ${OperationType.Debtor.name.tr}",
-                    subtitle1: AppString.paid.tr,
-                    amount1: (snapshot.data??0),
-                    subtitle2: AppString.unpaid.tr,
-                    amount2: controller.total(OperationType.Debtor) - (snapshot.data??0),
-                  );
-                }),
-            const SizedBox(height: AppConstant.paddingValue),
-            FutureBuilder<int?>(
-                future: db.getTotalEarnCreditor(),
-              builder: (context, snapshot) {
-                return RectCard(
-                  title: "${AppString.total.tr} ${OperationType.Creditor.name.tr}",
-                  subtitle1: AppString.paid.tr,
-                  amount1: (snapshot.data??0),
-                  subtitle2: AppString.unpaid.tr,
-                  amount2: controller.total(OperationType.Creditor) - (snapshot.data??0),
-                );
-              }
+            GestureDetector(
+              onTap: () {
+                Get.to(const OperationView(OperationType.Debtor));
+              },
+              child: FutureBuilder<int?>(
+                  future: db.getTotalPaidDebtor(),
+                  builder: (context, snapshot) {
+                    return RectCard(
+                      title: "${AppString.total.tr} ${OperationType.Debtor.name.tr}",
+                      subtitle1: AppString.paid.tr,
+                      amount1: (snapshot.data ?? 0),
+                      subtitle2: AppString.unpaid.tr,
+                      amount2: controller.total(OperationType.Debtor) - (snapshot.data ?? 0),
+                    );
+                  }),
             ),
             const SizedBox(height: AppConstant.paddingValue),
-            if(controller.incomes.isNotEmpty)
+            GestureDetector(
+              onTap: () {
+                Get.to(const OperationView(OperationType.Creditor));
+              },
+              child: FutureBuilder<int?>(
+                  future: db.getTotalEarnCreditor(),
+                  builder: (context, snapshot) {
+                    return RectCard(
+                      title: "${AppString.total.tr} ${OperationType.Creditor.name.tr}",
+                      subtitle1: AppString.paid.tr,
+                      amount1: (snapshot.data ?? 0),
+                      subtitle2: AppString.unpaid.tr,
+                      amount2: controller.total(OperationType.Creditor) - (snapshot.data ?? 0),
+                    );
+                  }),
+            ),
+            const SizedBox(height: AppConstant.paddingValue),
+            if (controller.incomes.isNotEmpty)
               BarChartWidget(operations: controller.outcomes, title: OperationType.Outcome.name.tr),
             const SizedBox(height: AppConstant.paddingValue),
-            if(controller.incomes.isNotEmpty)
+            if (controller.incomes.isNotEmpty)
               BarChartWidget(operations: controller.incomes, title: OperationType.Income.name.tr),
             const SizedBox(height: AppConstant.paddingValue),
-            if(controller.operations.isNotEmpty)
-              LineChartWidget(operations: controller.operations),
+            if (controller.operations.isNotEmpty) LineChartWidget(operations: controller.operations),
           ],
         );
       }),

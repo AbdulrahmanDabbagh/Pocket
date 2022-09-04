@@ -45,4 +45,6 @@ final arSY = <String, String>{
   AppString.usernameOrEmail : "اسم المستخدم او الايميل",
   AppString.password : "كلمة السر",
   AppString.login : "تسجيل الدخول",
+  AppString.profile : "ملف التعريف",
+  AppString.futureGoals : "اهداف مستقبلية",
 };

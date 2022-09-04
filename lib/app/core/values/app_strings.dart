@@ -53,5 +53,7 @@ class AppString{
   static const usernameOrEmail = "Username or Email";
   static const password = "Password";
   static const login = "Login";
+  static const profile = "Profile";
+  static const futureGoals = "Future goals";
 
 }

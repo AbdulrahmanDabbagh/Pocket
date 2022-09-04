@@ -15,6 +15,7 @@ class HomeController extends GetxController{
   late int amount;
   final addForm = GlobalKey<FormState>();
   bool? delete;
+  var selectedPos = 0.obs ;
 
   searchButton(){
     Get.toNamed(AppRoutes.search);
