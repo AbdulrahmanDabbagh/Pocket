@@ -7,7 +7,7 @@ class Operations extends Table {
   IntColumn get amount => integer()();
   DateTimeColumn get date => dateTime()();
   DateTimeColumn get endDate => dateTime().nullable()();
-  TextColumn get description => text()();
+  TextColumn get description => text().nullable()();
   IntColumn get catId => integer().references(Categories, #id)();
 
   @override

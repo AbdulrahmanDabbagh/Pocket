@@ -44,9 +44,15 @@ class RectCard extends StatelessWidget {
                         subtitle1,
                         style: const TextStyle(fontSize: 20, color: Colors.black, fontWeight: FontWeight.bold,height: 1),
                       ),
-                      const SizedBox(height: 7),
+                      const SizedBox(height: 15),
                       Text(
-                        "${amount1.withComma} ${AppString.sp.tr}",
+                        amount1.withComma,
+                        style: const TextStyle(fontSize: 20,height: 1),
+                        textAlign: TextAlign.center,
+                      ),
+                      const SizedBox(height: 8),
+                      Text(
+                        AppString.sp.tr,
                         style: const TextStyle(fontSize: 20,height: 1),
                         textAlign: TextAlign.center,
                       )
@@ -68,8 +74,11 @@ class RectCard extends StatelessWidget {
                         subtitle2,
                         style: const TextStyle(fontSize: 20, color: Colors.black, fontWeight: FontWeight.bold,height: 1),
                       ),
-                      const SizedBox(height: 7),
-                      Text("${amount2.withComma} ${AppString.sp.tr}",
+                      const SizedBox(height: 15),
+                      Text(amount2.withComma,
+                          style: const TextStyle(fontSize: 20,height: 1), textAlign: TextAlign.center),
+                      const SizedBox(height: 8),
+                      Text(AppString.sp.tr,
                           style: const TextStyle(fontSize: 20,height: 1), textAlign: TextAlign.center)
                     ],
                   ),

@@ -47,5 +47,8 @@ final enUS = <String, String>{
   AppString.login : "Login",
   AppString.profile : "Profile",
   AppString.futureGoals : "Future goals",
+  AppString.doIt : "Do it",
+  AppString.theme : "Theme",
+  AppString.noDescription : "No description",
 
 };

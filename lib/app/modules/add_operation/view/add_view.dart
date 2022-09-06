@@ -203,12 +203,6 @@ class AddView extends GetView<AddController> {
                     ),
                     initialValue: (controller.operation?.description ?? "").toString(),
                     onChanged: (v) => controller.description = v,
-                    validator: (String? value) {
-                      if (value == null || value.isEmpty) {
-                        return AppString.required.tr;
-                      }
-                      return null;
-                    },
                   ),
                   const SizedBox(height: AppConstant.paddingValue),
                   ElevatedButton(

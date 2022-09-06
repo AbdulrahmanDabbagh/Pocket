@@ -1,3 +1,4 @@
+import 'package:circular_bottom_navigation/circular_bottom_navigation.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:money_managment/app/router/app_routes.dart';
@@ -16,6 +17,9 @@ class HomeController extends GetxController{
   final addForm = GlobalKey<FormState>();
   bool? delete;
   var selectedPos = 0.obs ;
+
+  final CircularBottomNavigationController navigationController = CircularBottomNavigationController(0);
+
 
   searchButton(){
     Get.toNamed(AppRoutes.search);

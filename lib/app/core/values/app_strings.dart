@@ -24,36 +24,41 @@ class AppString{
   static const Filter = "Filter";
   static const Cancel = "Cancel";
   static const Apply = "Apply";
-  static const TotalOutcome = "Total Outcome";
-  static const TotalIncome = "Total Income";
-  static const TotalDept = "Total Dipt";
-  static const TotalCreditor = "Total Creditor";
-  static const TotalCash = "Total Cash";
+  static const TotalOutcome = "TotalOutcome";
+  static const TotalIncome = "TotalIncome";
+  static const TotalDept = "TotalDept";
+  static const TotalCreditor = "TotalCreditor";
+  static const TotalCash = "TotalCash";
   static const Budget = "Budget";
   static const Language = "Language";
-  static const addOperation= "Add operation";
-  static const amount = "Amount";
-  static const selectAType = "Select a type";
-  static const selectACategory = "Select a category";
-  static const addNewCategory = "Add new category";
-  static const categoryName = "Category name";
-  static const thiscategoryIsExist = "this category is exist";
+  static const addOperation= "addOperation";
+  static const amount = "amount";
+  static const selectAType = "selectAType";
+  static const selectACategory = "selectACategory";
+  static const addNewCategory = "addNewCategory";
+  static const categoryName = "categoryName";
+  static const thiscategoryIsExist = "thisCategoryIsExist";
   static const description = "Description";
   static const add = "Add";
   static const from = "From";
   static const to = "To";
   static const required = "Required";
-  static const invalidAmount = "Invalid amount";
+  static const invalidAmount = "invalidAmount";
   static const remain = "Remain";
   static const total = "Total";
-  static const areYouSure = "Are you sure?";
+  static const areYouSure = "areYouSure?";
   static const sp = "sp";
   static const paid = "paid";
   static const unpaid = "unpaid";
-  static const usernameOrEmail = "Username or Email";
+  static const usernameOrEmail = "usernameOrEmail";
   static const password = "Password";
   static const login = "Login";
   static const profile = "Profile";
   static const futureGoals = "Future goals";
+  static const doIt = "Do it";
+
+  static const theme = "Theme";
+
+  static const noDescription = "noDescription";
 
 }

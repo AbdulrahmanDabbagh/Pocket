@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:money_managment/app/components/confirm_operation_dialog.dart';
 import 'package:money_managment/app/core/enum/type_enum.dart';
+import 'package:money_managment/app/core/extensions/num_extension.dart';
 import 'package:money_managment/app/core/values/app_constant.dart';
 import 'package:money_managment/app/core/values/app_strings.dart';
 import 'package:money_managment/app/core/values/translation/app_translation.dart';
@@ -63,7 +64,7 @@ class OperationsCard extends GetView<HomeController> {
                 child: Text(AppString.Edit.tr),
                 onTap: () async {
                   await Future.delayed(const Duration(milliseconds: 50));
-                  Get.toNamed(AppRoutes.add, arguments: operation);
+                  Get.toNamed(AppRoutes.addOperation, arguments: operation);
                 },
               ),
             PopupMenuItem (
@@ -103,7 +104,7 @@ class OperationsCard extends GetView<HomeController> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Text(
-                    operation.amount.toString(),
+                    operation.amount.withComma.toString(),
                     style: TextStyle(fontSize: 24),
                   ),
                   const Spacer(),
@@ -115,7 +116,7 @@ class OperationsCard extends GetView<HomeController> {
                         final count = debtorCreditor.fold<int>(0, (p, v) => p + v.amount);
                         remain = operation.amount - count;
                         final remainString = AppString.remain.tr;
-                        return Text("$remainString : $remain");
+                        return Text("$remainString : ${remain.withComma}");
                       },
                     ),
                 ],

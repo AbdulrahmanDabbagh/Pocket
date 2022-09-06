@@ -1,4 +1,3 @@
-import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:money_managment/app/core/enum/type_enum.dart';
@@ -11,6 +10,7 @@ import 'package:money_managment/app/modules/dash_board/view/widgets/rect_card.da
 import 'package:money_managment/app/modules/dash_board/view/widgets/sqaure_info_card.dart';
 import 'package:money_managment/main.dart';
 
+import '../../../core/values/app_colors.dart';
 import '../../../core/values/app_strings.dart';
 
 class DashBoardView extends GetView<DashBoardController> {
@@ -19,16 +19,7 @@ class DashBoardView extends GetView<DashBoardController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(AppString.Dashboard.tr),
-        actions: [
-          IconButton(
-              icon: const Icon(Icons.filter_list),
-              onPressed: () {
-                controller.filterButton();
-              })
-        ],
-      ),
+      backgroundColor: Colors.transparent,
       body: Obx(() {
         return ListView(
           padding: AppConstant.pagePadding,
@@ -104,6 +95,14 @@ class DashBoardView extends GetView<DashBoardController> {
           ],
         );
       }),
+      floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            controller.filterButton();
+          },
+        backgroundColor: AppColors.number2,
+        child:
+        const Icon(Icons.filter_list , color: AppColors.white),
+      ),
     );
   }
 }

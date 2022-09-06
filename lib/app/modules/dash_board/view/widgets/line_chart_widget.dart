@@ -4,6 +4,7 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:money_managment/app/core/enum/type_enum.dart';
+import 'package:money_managment/app/core/values/app_colors.dart';
 import 'package:money_managment/app/data/db/db.dart';
 
 import '../../../../core/values/app_constant.dart';
@@ -171,7 +172,7 @@ class LineChartWidget extends StatelessWidget {
 
   LineChartBarData get incomeChart => LineChartBarData(
     isCurved: true,
-    color: const Color(0xff4af699),
+    color: Color.fromRGBO(196, 66, 101, 1.0),
     barWidth: 6,
     isStrokeCapRound: false,
     dotData: FlDotData(show: true,),
@@ -186,7 +187,7 @@ class LineChartWidget extends StatelessWidget {
 
   LineChartBarData get lineChartBarData1_2 => LineChartBarData(
     isCurved: true,
-    color: const Color(0xffaa4cfc),
+    color: Color.fromRGBO(254, 190, 0, 1.0),
     barWidth: 6,
     isStrokeCapRound: true,
     dotData: FlDotData(show: true),
@@ -205,7 +206,7 @@ class LineChartWidget extends StatelessWidget {
     // print(combinedOperations(creditors));
     return LineChartBarData(
     isCurved: true,
-    color: const Color(0xff27b6fc),
+    color: Color.fromRGBO(0, 43, 91, 1),
     barWidth: 6,
     isStrokeCapRound: true,
     dotData: FlDotData(show: true),
@@ -221,7 +222,7 @@ class LineChartWidget extends StatelessWidget {
     // print(combinedOperations(debtors));
     return LineChartBarData(
     isCurved: true,
-    color: const Color(0xfffc2755),
+    color: AppColors.number4,
     barWidth: 6,
     isStrokeCapRound: true,
     dotData: FlDotData(show: true),

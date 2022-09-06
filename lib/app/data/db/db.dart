@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:drift/drift.dart';
 import 'package:drift/native.dart';
 import 'package:money_managment/app/data/tables/debtor_t.dart';
+import 'package:money_managment/app/data/tables/future_goals_t.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:path/path.dart' as p;
 import '../models/filter.dart';
@@ -21,29 +22,34 @@ LazyDatabase _openConnection() {
   });
 }
 
-@DriftDatabase(tables: [Operations, Categories, DebtorAndCreditors])
+@DriftDatabase(tables: [Operations, Categories, DebtorAndCreditors, FutureGoals])
 class MyDatabase extends _$MyDatabase {
   // we tell the database where to store the data with this constructor
   MyDatabase() : super(_openConnection());
 
   Future<int> addCategory(Category category) => into(categories).insert(category);
   Future<int> addOperations(Operation operation) => into(operations).insert(operation);
-  Future<int> addDebtorAndCreditor(DebtorAndCreditor) => into(debtorAndCreditors).insert(DebtorAndCreditor);
+  Future<int> addDebtorAndCreditor(DebtorAndCreditor debtorAndCreditor) => into(debtorAndCreditors).insert(debtorAndCreditor);
+  Future<int> addFutureGoal(FutureGoal futureGoal) => into(futureGoals).insert(futureGoal);
 
   Future<int> removeOperation(Operation operation) => delete(operations).delete(operation);
   Future<int> removeCategory(Category category) => delete(categories).delete(category);
+  Future<int> removeFutureGoal(FutureGoal futureGoal) => delete(futureGoals).delete(futureGoal);
 
   Future<bool> editOperation(Operation operation) => update(operations).replace(operation);
   Future<bool> editCategory(Category category) => update(categories).replace(category);
+  Future<bool> editFutureGoal(FutureGoal futureGoal) => update(futureGoals).replace(futureGoal);
 
   Stream<List<Category>> watchCategories() => select(categories).watch();
   Stream<List<Category>> watchCategoriesType(String type) => (select(categories)..where((tbl) => tbl.type.equals(type))).watch();
   Stream<List<Category>> watchCategoriesTypes(List<String> types) => (select(categories)..where((tbl) => tbl.type.isIn(types))).watch();
+  Stream<List<Operation>> watchOperations(String type) => (select(operations)..where((tbl) => tbl.type.equals(type))).watch();
+  Stream<List<FutureGoal>> watchFutureGoals() => select(futureGoals).watch();
+
   Future<List<Category>> getCategoriesType(String type) => (select(categories)..where((tbl) => tbl.type.equals(type))).get();
   Future<List<Category>> searchCategories(String type, String category) => (select(categories)..where((tbl) => tbl.type.equals(type))..where((tbl) => tbl.name.equals(category))).get();
   Future<List<Category>> getCategories(String category) => (select(categories)..where((tbl) => tbl.name.equals(category))).get();
 
-  Stream<List<Operation>> watchOperations(String type) => (select(operations)..where((tbl) => tbl.type.equals(type))).watch();
   Future<List<Operation>> getAllOperations() {
     return (select(operations)..orderBy([(t) => OrderingTerm(expression: t.date)])).get();
   }
@@ -103,7 +109,7 @@ class MyDatabase extends _$MyDatabase {
   }
 
 
-  // you should bump this number whenever you change or add a table definition.
+  // you should bump this number whenever you change or add_operation a table definition.
   // Migrations are covered later in the documentation.
   @override
   int get schemaVersion => 1;

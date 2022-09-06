@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:money_managment/app/core/values/app_strings.dart';
 import 'package:money_managment/app/data/db/db.dart';
 import 'package:money_managment/app/modules/home/controller/home_controller.dart';
 import 'package:money_managment/app/core/values/app_constant.dart';
@@ -28,8 +29,8 @@ class DetailsBottomSheet extends GetView<HomeController> {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                Text(operation.description,textAlign: TextAlign.center,style: TextStyle(color: AppColors.blue,fontSize: 18,fontWeight: FontWeight.bold)),
-                SizedBox(height: AppConstant.paddingValue,),
+                Text(operation.description??AppString.noDescription.tr,textAlign: TextAlign.center,style: TextStyle(color: AppColors.blue,fontSize: 18,fontWeight: FontWeight.bold)),
+                const SizedBox(height: AppConstant.paddingValue),
                 StreamBuilder<List<DebtorAndCreditor>>(
                    stream: db.watchDebtorAndCreditor(operation.id!),
                    builder: (context, snapshot) {

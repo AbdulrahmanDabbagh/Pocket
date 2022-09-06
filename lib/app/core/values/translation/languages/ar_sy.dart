@@ -47,4 +47,8 @@ final arSY = <String, String>{
   AppString.login : "تسجيل الدخول",
   AppString.profile : "ملف التعريف",
   AppString.futureGoals : "اهداف مستقبلية",
+  AppString.doIt : "افعلها",
+  AppString.theme : "المظهر",
+  AppString.noDescription : "لايوجد وصف",
+
 };

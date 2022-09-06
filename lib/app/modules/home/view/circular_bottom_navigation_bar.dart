@@ -2,6 +2,7 @@ import 'package:circular_bottom_navigation/tab_item.dart';
 import 'package:flutter/material.dart';
 import 'package:circular_bottom_navigation/circular_bottom_navigation.dart';
 import 'package:get/get.dart';
+import 'package:money_managment/app/core/values/app_colors.dart';
 import 'package:money_managment/app/core/values/app_strings.dart';
 import 'package:money_managment/app/modules/home/controller/home_controller.dart';
 
@@ -15,11 +16,12 @@ class CircularBottomNavigationBar extends GetView<HomeController> {
   CircularBottomNavigationController(controller.selectedPos.value);
 
   final List<TabItem> tabItems = List.of([
-    TabItem(Icons.home, AppString.profile , Colors.blue, labelStyle: TextStyle(fontWeight: FontWeight.normal)),
-    TabItem(Icons.settings, AppString.Dashboard , Colors.orange, labelStyle: TextStyle(color: Colors.red, fontWeight: FontWeight.bold)),
-    TabItem(Icons.golf_course_outlined, AppString.futureGoals , Colors.red),
+    TabItem(Icons.settings, AppString.profile , AppColors.number2),
+    TabItem(Icons.home, AppString.Dashboard , AppColors.number2),
+    TabItem(Icons.golf_course_outlined, AppString.futureGoals , AppColors.number2),
   ]);
 
+  @override
   Widget build(BuildContext context) {
     return Obx(() {
       return CircularBottomNavigation(
@@ -28,15 +30,17 @@ class CircularBottomNavigationBar extends GetView<HomeController> {
         selectedPos: controller.selectedPos.value,
         barBackgroundColor: Colors.white,
         backgroundBoxShadow: const <BoxShadow>[
-          BoxShadow(color: Colors.black45, blurRadius: 10.0),
+          BoxShadow(color: Colors.black45, blurRadius: 0),
         ],
         animationDuration: Duration(milliseconds: 300),
         selectedCallback: (int? selectedPos) {
           controller.selectedPos.value = selectedPos ?? 0;
-          if(controller.selectedPos.value == 0) controller.currentPage.value= OperationType.Outcome.name;
-          if(controller.selectedPos.value == 1) controller.currentPage.value=OperationType.Income.name ;
-          if(controller.selectedPos.value == 2) controller.currentPage.value=OperationType.Creditor.name  ;
+          // if(controller.selectedPos.value == 0) controller.currentPage.value= OperationType.Outcome.name;
+          // if(controller.selectedPos.value == 1) controller.currentPage.value=OperationType.Income.name ;
+          // if(controller.selectedPos.value == 2) controller.currentPage.value=OperationType.Creditor.name  ;
         },
+        selectedIconColor: AppColors.number4,
+        normalIconColor: AppColors.number3,
       );
     });
   }

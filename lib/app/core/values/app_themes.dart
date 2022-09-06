@@ -12,10 +12,13 @@ class AppTheme{
 }
 
 final _lightTheme = ThemeData.light().copyWith(
-  scaffoldBackgroundColor: AppColors.white,
+  scaffoldBackgroundColor: Colors.transparent,
   primaryColor: AppColors.blue,
   colorScheme: ThemeData().colorScheme.copyWith(
     primary: AppColors.blue,
+  ),
+  bottomNavigationBarTheme: BottomNavigationBarThemeData(
+    backgroundColor: Colors.transparent
   )
 );
 

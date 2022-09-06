@@ -37,8 +37,8 @@ class OperationView extends GetView<DashBoardController> {
         floatingActionButton: FloatingActionButton(
           onPressed: () {
             // Get.toNamed("page", arguments: operation); /// from home
-            // final operation = Get.arguments as Operation?; /// from add controller
-            Get.toNamed(AppRoutes.add);
+            // final operation = Get.arguments as Operation?; /// from add_operation controller
+            Get.toNamed(AppRoutes.addOperation);
           },
           backgroundColor: AppColors.number2,
           child: const Icon(Icons.add, color: AppColors.number4),
