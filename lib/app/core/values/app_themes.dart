@@ -43,6 +43,7 @@ Color get searchIconColor =>AppStorage().read(AppStorage.currentTheme) == "Theme
 Color get menuBackgroundColor =>AppStorage().read(AppStorage.currentTheme) == "Theme mode 1"? AppColors.white:Colors.black;
 Color get menuTextColor =>AppStorage().read(AppStorage.currentTheme) == "Theme mode 1"? Colors.black : AppColors.white;
 Color get detailsBottomSheetBorderColor =>AppStorage().read(AppStorage.currentTheme) == "Theme mode 1"? AppColors.blue : AppColors.number4;
+Color get earningPayoffBackgroundColor =>AppStorage().read(AppStorage.currentTheme) == "Theme mode 1"? AppColors.white : AppColors.black;
 
 
 

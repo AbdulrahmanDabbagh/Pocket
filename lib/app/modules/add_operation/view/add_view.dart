@@ -47,7 +47,7 @@ class AddView extends GetView<AddController> {
                           borderSide: BorderSide(color: textFieldBoarderColor)),
                       errorBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(AppConstant.radius),
-                          borderSide: BorderSide(color: textFieldBoarderColor)),
+                          borderSide: BorderSide(color: Colors.red)),
                       hintText: AppString.amount.tr,
                       hintStyle: TextStyle(color: textFieldHintStyle),
                       fillColor: textFieldFillColor,
@@ -109,7 +109,7 @@ class AddView extends GetView<AddController> {
                             borderSide: BorderSide(color: textFieldBoarderColor)),
                         errorBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(AppConstant.radius),
-                            borderSide: BorderSide(color: textFieldBoarderColor)),
+                            borderSide: BorderSide(color: Colors.red)),
                         hintStyle: TextStyle(color: textFieldHintStyle),
                         fillColor: textFieldFillColor,
                         filled: true),
@@ -171,7 +171,7 @@ class AddView extends GetView<AddController> {
                                     borderSide: BorderSide(color: textFieldBoarderColor)),
                                 errorBorder: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(AppConstant.radius),
-                                    borderSide: BorderSide(color: textFieldBoarderColor)),
+                                    borderSide: BorderSide(color: Colors.red)),
                                 fillColor: textFieldFillColor,
                                 filled: true),
                             hint: Text(AppString.selectACategory.tr ,style: TextStyle(color:textFieldHintStyle)),
@@ -226,7 +226,7 @@ class AddView extends GetView<AddController> {
                           borderSide: BorderSide(color: textFieldBoarderColor)),
                       errorBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(AppConstant.radius),
-                          borderSide: BorderSide(color: textFieldBoarderColor)),
+                          borderSide: BorderSide(color: Colors.red)),
                       hintText: AppString.description.tr,
                       hintStyle: TextStyle(color: textFieldHintStyle),
                       fillColor: textFieldFillColor,

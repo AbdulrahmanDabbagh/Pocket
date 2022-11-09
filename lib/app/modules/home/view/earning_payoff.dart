@@ -10,6 +10,7 @@ import '../../../../main.dart';
 import '../../../core/values/app_colors.dart';
 import '../../../core/values/app_constant.dart';
 import '../../../core/values/app_strings.dart';
+import '../../../core/values/app_themes.dart';
 
 class EarningPayoff extends GetView<HomeController> {
   const EarningPayoff(this.operation, this.remain, {Key? key}) : super(key: key);
@@ -22,6 +23,7 @@ class EarningPayoff extends GetView<HomeController> {
     return Form(
       key: controller.addForm,
       child: BottomSheet(
+        backgroundColor: earningPayoffBackgroundColor,
         shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.vertical(top: Radius.circular(AppConstant.radius))
         ),
@@ -34,15 +36,18 @@ class EarningPayoff extends GetView<HomeController> {
                 TextFormField(
                   decoration: InputDecoration(
                     focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(AppConstant.radius), borderSide: BorderSide(color: AppColors.number3)),
-                    enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(AppConstant.radius), borderSide: BorderSide(color: AppColors.number2)),
+                        borderRadius: BorderRadius.circular(AppConstant.radius), borderSide: BorderSide(color: textFieldBoarderColor)),
                     border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(AppConstant.radius), borderSide: BorderSide(color: AppColors.number2)),
+                        borderRadius: BorderRadius.circular(AppConstant.radius), borderSide: BorderSide(color: textFieldBoarderColor)),
+                    enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(AppConstant.radius), borderSide: BorderSide(color: textFieldBoarderColor)),
                     errorBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(AppConstant.radius), borderSide: BorderSide(color: Colors.red)),
                     hintText: AppString.amount.tr,
+                    hintStyle: TextStyle(color: textFieldHintStyle),
+                    fillColor: textFieldFillColor,
                   ),
+                  style: TextStyle(color: textFieldHintStyle),
                   inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                   keyboardType: TextInputType.number,
                   onChanged: (v) => controller.amount = int.parse(v),
@@ -65,20 +70,20 @@ class EarningPayoff extends GetView<HomeController> {
                           style: ButtonStyle(
                             backgroundColor:
                             MaterialStateProperty.resolveWith(
-                                    (states) => AppColors.white),
+                                    (states) => textFieldFillColor),
                             shape: MaterialStateProperty.all(
                                 RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(
                                         AppConstant.radius),
-                                    side: const BorderSide(
-                                        color: AppColors.number3))),
+                                    side: BorderSide(
+                                        color: textFieldFillColor))),
                           ),
                           child: Padding(
                             padding: const EdgeInsets.all(11.0),
                             child: Text(
                               DateFormat('yyyy-MM-dd')
                                   .format(controller.debtorDate.value),
-                              style: const TextStyle(color: AppColors.number3, fontSize: 16),
+                              style: TextStyle(color: textFieldHintStyle, fontSize: 16),
                             ),
                           ),
                           onPressed: () async {

@@ -43,7 +43,7 @@ class AddFutureGoalView extends GetView<AddFutureGoalController> {
                           borderRadius: BorderRadius.circular(AppConstant.radius),
                           borderSide: BorderSide(color: textFieldBoarderColor)),
                       errorBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(AppConstant.radius), borderSide: BorderSide(color: textFieldBoarderColor)),
+                          borderRadius: BorderRadius.circular(AppConstant.radius), borderSide: BorderSide(color: Colors.red)),
                       hintText: AppString.amount.tr,
                       hintStyle: TextStyle(color: textFieldHintStyle),
                       fillColor: textFieldFillColor,
@@ -75,7 +75,7 @@ class AddFutureGoalView extends GetView<AddFutureGoalController> {
                           borderRadius: BorderRadius.circular(AppConstant.radius),
                           borderSide: BorderSide(color: textFieldBoarderColor)),
                       errorBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(AppConstant.radius), borderSide: BorderSide(color: textFieldBoarderColor)),
+                          borderRadius: BorderRadius.circular(AppConstant.radius), borderSide: BorderSide(color: Colors.red)),
                       hintText: AppString.description.tr,
                       hintStyle: TextStyle(color: textFieldHintStyle),
                       fillColor: textFieldFillColor,
