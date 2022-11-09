@@ -42,6 +42,7 @@ Color get chipsTextSelectedColor =>AppStorage().read(AppStorage.currentTheme) ==
 Color get searchIconColor =>AppStorage().read(AppStorage.currentTheme) == "Theme mode 1"? Colors.black:AppColors.number4;
 Color get menuBackgroundColor =>AppStorage().read(AppStorage.currentTheme) == "Theme mode 1"? AppColors.white:Colors.black;
 Color get menuTextColor =>AppStorage().read(AppStorage.currentTheme) == "Theme mode 1"? Colors.black : AppColors.white;
+Color get detailsBottomSheetBorderColor =>AppStorage().read(AppStorage.currentTheme) == "Theme mode 1"? AppColors.blue : AppColors.number4;
 
 
 
