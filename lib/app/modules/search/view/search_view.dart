@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:money_managment/app/core/values/app_constant.dart';
 import 'package:money_managment/app/core/values/app_strings.dart';
+import 'package:money_managment/app/core/values/app_themes.dart';
 import 'package:money_managment/app/modules/search/controller/search_controller.dart';
-import '../../../../main.dart';
+import '../../../core/utils/background_image.dart';
 import '../../../core/values/app_colors.dart';
-import '../../../data/db/db.dart';
 import '../../home/view/operations_card.dart';
 
 class SearchView extends GetView<SearchController> {
@@ -13,57 +13,58 @@ class SearchView extends GetView<SearchController> {
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
-      body: SafeArea(
-        child: Padding(
-          padding: AppConstant.pagePadding,
-          child: Obx((){
+      body: Container(
+        decoration: BoxDecoration(
+          image: backgroundImage,
+        ),
+        child: SafeArea(
+          child: Padding(
+            padding: AppConstant.pagePadding,
+            child: Obx(() {
               return Column(
                 children: [
                   Row(
                     children: [
-                      IconButton(
-                        onPressed: () => Get.back(),
-                        icon: Icon(Icons.arrow_back_rounded)
-                      ),
+                      IconButton(onPressed: () => Get.back(), icon: Icon(Icons.arrow_back_rounded ,color: searchIconColor,)),
                       Expanded(
-                        child:
-                        TextFormField(
-                              controller: controller.textSearchController,
-                              decoration: InputDecoration(
-                                hintText: AppString.Search.tr,
-                                suffixIcon: controller.searchText.isNotEmpty?
-                                IconButton(
-                                  onPressed: (){
-                                    controller.textSearchController.clear();
-                                    controller.searchText("");
+                          child: TextFormField(
+                        controller: controller.textSearchController,
+                        decoration: InputDecoration(
+                            hintText: AppString.Search.tr,
+                            hintStyle: TextStyle(color: textFieldHintStyle),
+                            fillColor: textFieldFillColor,
+                            filled: true,
+                            suffixIcon: controller.searchText.isNotEmpty
+                                ? IconButton(
+                                    onPressed: () {
+                                      controller.textSearchController.clear();
+                                      controller.searchText("");
                                     },
-                                  icon: Icon(Icons.clear),
-                                )
-                                    :null
-                              ),
-                              onChanged: (v) {
-                                controller.searchText.value=v;
-                                controller.search();
-                              },
-                            )
-                      ),
-                      const SizedBox(width: AppConstant.paddingValue/2),
+                                    icon: Icon(Icons.clear,color: searchIconColor),
+                                  )
+                                : null),
+                        style: TextStyle(color: textFieldHintStyle),
+                        onChanged: (v) {
+                          controller.searchText.value = v;
+                          controller.search();
+                        },
+                      )),
+                      const SizedBox(width: AppConstant.paddingValue / 2),
                     ],
                   ),
                   const SizedBox(height: AppConstant.paddingValue),
                   Expanded(
                     child: ListView.builder(
                       itemCount: controller.operations.length,
-                      itemBuilder: (context, index){
+                      itemBuilder: (context, index) {
                         return OperationsCard(operation: controller.operations[index]);
                       },
                     ),
                   ),
                 ],
               );
-            }
+            }),
           ),
         ),
       ),
@@ -71,9 +72,8 @@ class SearchView extends GetView<SearchController> {
         onPressed: () {
           controller.filterButton();
         },
-          backgroundColor: AppColors.number4,
-        child:
-          const Icon(Icons.filter_list, color: AppColors.number2),
+        backgroundColor: floatingActionButtonBackgroundColor,
+        child: Icon(Icons.filter_list, color: floatingActionButtonIconColor),
       ),
     );
   }

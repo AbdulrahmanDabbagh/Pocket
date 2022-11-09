@@ -9,6 +9,8 @@ import 'package:money_managment/app/modules/home/binding/home_binding.dart';
 import 'package:money_managment/app/modules/home/view/home_page.dart';
 import 'package:money_managment/app/modules/login/binding/login_binding.dart';
 import 'package:money_managment/app/modules/login/view/login_view.dart';
+import 'package:money_managment/app/modules/onboarding_page/binding/onboarding_page_binding.dart';
+import 'package:money_managment/app/modules/onboarding_page/view/onboarding_page_view.dart';
 import 'package:money_managment/app/modules/profile/binding/profile_binding.dart';
 import 'package:money_managment/app/modules/profile/view/profile_view.dart';
 import 'package:money_managment/app/modules/search/binding/search_binding.dart';
@@ -60,13 +62,18 @@ class AppPages{
     ),
     GetPage(
       name: AppRoutes.profile,
-      page: () => const ProfileView(),
+      page: () => ProfileView(),
       binding: ProfileBinding(),
     ),
     GetPage(
       name: AppRoutes.addFutureGoal,
       page: () => const AddFutureGoalView(),
       binding: AddFutureGoalbinding(),
+    ),
+    GetPage(
+      name: AppRoutes.onboardingPage,
+      page: () => const OnboardingPageView(),
+      binding: OnboardingPageBinding(),
     ),
   ];
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:money_managment/app/core/values/app_strings.dart';
+import 'package:money_managment/app/core/values/app_themes.dart';
 import 'package:money_managment/app/data/db/db.dart';
 import '../../main.dart';
 import '../core/values/app_colors.dart';
@@ -13,15 +14,17 @@ class ConfirmOperationDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Dialog(
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(AppConstant.radius)),
+      backgroundColor: filterBackgroundColor,
       child: Padding(
         padding: AppConstant.pagePadding,
         child: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Text(confirmText,style: const TextStyle(color: AppColors.blue)),
+            Text(confirmText,style: TextStyle(color: textColor)),
             const SizedBox(height: AppConstant.paddingValue),
-            Text(AppString.areYouSure.tr,style: const TextStyle(color: AppColors.number2)),
+            Text(AppString.areYouSure.tr,style: TextStyle(color: textColor)),
             const SizedBox(height: AppConstant.paddingValue),
             Row(
               children: [
@@ -31,8 +34,8 @@ class ConfirmOperationDialog extends StatelessWidget {
                       Get.back();
                     },
                     style: ElevatedButton.styleFrom(
-                        primary: AppColors.white, shadowColor: Colors.transparent, onPrimary: AppColors.blue, elevation: 0),
-                    child: Text(AppString.Cancel.tr),
+                        primary: textFieldFillColor, shadowColor: Colors.transparent, onPrimary: AppColors.blue, elevation: 0),
+                    child: Text(AppString.Cancel.tr,style: TextStyle(color: textFieldHintStyle)),
                   ),
                 ),
                 const SizedBox(width: 10),

@@ -44,6 +44,9 @@ dependencies:
   fl_chart: ^0.55.1
   auto_size_text: ^3.0.0
   circular_bottom_navigation: ^2.1.0
+  local_auth: ^2.1.2
+  flutter_screen_lock: ^7.0.4
+  smooth_page_indicator: ^1.0.0+2
 
 dev_dependencies:
   flutter_test:

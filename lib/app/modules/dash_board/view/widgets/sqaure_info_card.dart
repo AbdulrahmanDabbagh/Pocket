@@ -5,6 +5,7 @@ import 'package:money_managment/app/core/extensions/num_extension.dart';
 import 'package:money_managment/app/core/values/app_strings.dart';
 
 import '../../../../core/values/app_constant.dart';
+import '../../../../core/values/app_themes.dart';
 
 class SquareInfoCard extends StatelessWidget {
   const SquareInfoCard({Key? key, required this.title, required this.amount}) : super(key: key);
@@ -14,6 +15,7 @@ class SquareInfoCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
+      color: cardColor,
       shape: RoundedRectangleBorder(
           // side: const BorderSide(color: AppColors.number2,width: 0.2),
           borderRadius: BorderRadius.circular(AppConstant.radius)),
@@ -29,7 +31,7 @@ class SquareInfoCard extends StatelessWidget {
             Text(
               title,
               textAlign: TextAlign.center,
-              style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold,color: textColor),
             ),
             const SizedBox(
               height: 15,
@@ -38,7 +40,7 @@ class SquareInfoCard extends StatelessWidget {
               child: AutoSizeText(
                 amount.withComma,
                 textAlign: TextAlign.center,
-                style: const TextStyle(fontSize: 20),
+                style: TextStyle(fontSize: 20, color: textColor),
                 maxLines: 1,
                 maxFontSize: 20,
               ),
@@ -46,7 +48,7 @@ class SquareInfoCard extends StatelessWidget {
             const SizedBox(
               height: 8,
             ),
-            Text(AppString.sp.tr, textAlign: TextAlign.center, style: const TextStyle(fontSize: 20)),
+            Text(AppString.sp.tr, textAlign: TextAlign.center, style: TextStyle(fontSize: 20, color: textColor)),
             const SizedBox(
               height: 10,
             ),

@@ -13,7 +13,7 @@ class SearchController extends GetxController{
   Filter filter = Filter();
 
   search() async {
-    operations.assignAll(await db.filterOperations(filter..search = searchText.value));
+    operations.assignAll(await db.getFilterOperations(filter..search = searchText.value));
   }
 
   filterButton() async {

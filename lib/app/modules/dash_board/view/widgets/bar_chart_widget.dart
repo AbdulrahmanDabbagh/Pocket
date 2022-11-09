@@ -2,6 +2,7 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:money_managment/app/core/extensions/num_extension.dart';
 import 'package:money_managment/app/core/values/app_colors.dart';
+import 'package:money_managment/app/core/values/app_themes.dart';
 import 'package:money_managment/app/data/db/db.dart';
 import 'package:money_managment/main.dart';
 
@@ -24,6 +25,7 @@ class BarChartSample1State extends State<BarChartWidget> {
   @override
   Widget build(BuildContext context) {
     return Card(
+      color: cardColor,
       shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(AppConstant.radius)),
       margin: EdgeInsets.zero,
@@ -37,8 +39,8 @@ class BarChartSample1State extends State<BarChartWidget> {
           children: <Widget>[
             Text(
               widget.title,
-              style: const TextStyle(
-                  color: Color(0xff0f4a3c),
+              style: TextStyle(
+                  color: barChartColor,
                   fontSize: 24,
                   fontWeight: FontWeight.bold),
             ),
@@ -89,7 +91,7 @@ class BarChartSample1State extends State<BarChartWidget> {
 
   List<BarChartGroupData> showingGroups() => List.generate(_combine(widget.operations).length, (i) {
     final op = _combine(widget.operations).entries.toList()[i];
-    return makeGroupData(op.key, op.value.toDouble(), isTouched: i == touchedIndex);
+    return makeGroupData(op.key, op.value.toDouble(), isTouched: i == touchedIndex,barColor: barChartColor);
 
   });
 
@@ -155,8 +157,8 @@ class BarChartSample1State extends State<BarChartWidget> {
   }
 
   Widget getTitles(double value, TitleMeta meta) {
-    const style = TextStyle(
-      color: AppColors.blue,
+    final style = TextStyle(
+      color: barChartColor,
       fontWeight: FontWeight.bold,
       fontSize: 14,
     );

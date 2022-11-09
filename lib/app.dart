@@ -13,28 +13,29 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
+      color: AppColors.white,
       getPages: AppPages.pages,
       initialRoute: AppPages.initialRoute,
       translations: AppTranslation(),
       translationsKeys: AppTranslation().keys,
       locale: AppTranslation.currentLocale,
-      theme: AppTheme.lightTheme,
+      theme: AppTheme().currentTheme,
       darkTheme: AppTheme.darkTheme,
       themeMode: AppTheme.isDark?ThemeMode.dark:ThemeMode.light,
       debugShowCheckedModeBanner: false,
-      builder: (context, child){
-        return Container(
-          decoration:  BoxDecoration(
-            image: DecorationImage(
-                image: AssetImage("assets/images/wallpaper.jpg"),
-                fit: BoxFit.cover,
-                opacity: 0.2
-            ),
-            color: AppColors.white
-          ),
-          child: child,
-        );
-      },
+      // builder: (context, child){
+      //   return Container(
+      //     decoration:  BoxDecoration(
+      //       image: DecorationImage(
+      //           image: AssetImage("assets/images/wallpaper.jpg"),
+      //           fit: BoxFit.cover,
+      //           opacity: 1
+      //       ),
+      //       color: AppColors.white
+      //     ),
+      //     child: child,
+      //   );
+      // },
     );
   }
 }

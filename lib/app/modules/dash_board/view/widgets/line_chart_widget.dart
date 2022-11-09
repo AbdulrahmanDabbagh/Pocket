@@ -2,9 +2,12 @@ import 'dart:math';
 
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:money_managment/app/core/enum/type_enum.dart';
 import 'package:money_managment/app/core/values/app_colors.dart';
+import 'package:money_managment/app/core/values/app_strings.dart';
+import 'package:money_managment/app/core/values/app_themes.dart';
 import 'package:money_managment/app/data/db/db.dart';
 
 import '../../../../core/values/app_constant.dart';
@@ -26,6 +29,7 @@ class LineChartWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
+      color: cardColor,
       shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(AppConstant.radius)),
       margin: EdgeInsets.zero,
@@ -46,6 +50,45 @@ class LineChartWidget extends StatelessWidget {
               ),
             ),
           ),
+          SizedBox(height: 20,),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Container(
+                height: 10,
+                width: 10,
+                color: Color.fromRGBO(196, 66, 101, 1.0),
+              ),
+              SizedBox(width: 10,),
+              Text(AppString.Income.tr),
+              SizedBox(width: 20,),
+              Container(
+                height: 10,
+                width: 10,
+                color: Color.fromRGBO(254, 190, 0, 1.0),
+              ),
+              SizedBox(width: 10,),
+              Text(AppString.Outcome.tr),
+              SizedBox(width: 20,),
+              Container(
+                height: 10,
+                width: 10,
+                color: Color.fromRGBO(0, 43, 91, 1),
+              ),
+              SizedBox(width: 10,),
+              Text(AppString.Creditor.tr),
+              SizedBox(width: 20,),
+              Container(
+                height: 10,
+                width: 10,
+                color: AppColors.number4,
+              ),
+              SizedBox(width: 10,),
+              Text(AppString.Debtor.tr),
+              SizedBox(width: 20,),
+            ],
+          ),
+          SizedBox(height: 20,),
         ],
       ),
     );
@@ -163,7 +206,7 @@ class LineChartWidget extends StatelessWidget {
   FlBorderData get borderData => FlBorderData(
     show: true,
     border: const Border(
-      bottom: BorderSide(color: Color(0xff4e4965), width: 4),
+      bottom: BorderSide(color: AppColors.blackWithOpacity, width: 4),
       left: BorderSide(color: Colors.transparent),
       right: BorderSide(color: Colors.transparent),
       top: BorderSide(color: Colors.transparent),

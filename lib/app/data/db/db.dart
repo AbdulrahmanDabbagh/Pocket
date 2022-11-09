@@ -76,7 +76,28 @@ class MyDatabase extends _$MyDatabase {
   }
 
   // Future<List<Category>> filterCategory(Type type) => (select(categories)..where((tbl) => tbl.type.equals(type))).get();
-  Future<List<Operation>> filterOperations(Filter filter) {
+  Stream<List<Operation>> watchFilterOperations(Filter filter) {
+    final query = select(operations);
+    if(filter.search != null){
+      if(int.tryParse(filter.search!) != null) {
+        query.where((tbl) => tbl.amount.cast<String>().contains(filter.search!));
+      } else {
+        query.where((tbl) => tbl.description.contains(filter.search!));
+      }
+    }
+    if(filter.from != null) {
+      query.where((tbl) => tbl.date.isBetween(Variable<DateTime>(filter.from), Variable<DateTime>(filter.to!.add(Duration(hours: 23,minutes: 59)))));
+    }
+    if(filter.catIds.isEmpty && filter.types.isNotEmpty){
+      query.where((tbl) => tbl.type.isIn(filter.types));
+    } else if(filter.catIds.isNotEmpty){
+      query.where((tbl) => tbl.catId.isIn(filter.catIds));
+    }
+    query.orderBy([(t) => OrderingTerm(expression: t.date)]);
+    return query.watch();
+  }
+
+  Future<List<Operation>> getFilterOperations(Filter filter) {
     final query = select(operations);
     if(filter.search != null){
       if(int.tryParse(filter.search!) != null) {
@@ -96,7 +117,6 @@ class MyDatabase extends _$MyDatabase {
     query.orderBy([(t) => OrderingTerm(expression: t.date)]);
     return query.get();
   }
-
   // Future<Category> getCategory(int id){
   //   return (select(categories)..where((tbl) => tbl.id.equals(id))).getSingle();
   // }

@@ -6,11 +6,11 @@ import 'package:money_managment/app/core/enum/type_enum.dart';
 import 'package:money_managment/app/core/extensions/num_extension.dart';
 import 'package:money_managment/app/core/values/app_constant.dart';
 import 'package:money_managment/app/core/values/app_strings.dart';
+import 'package:money_managment/app/core/values/app_themes.dart';
 import 'package:money_managment/app/core/values/translation/app_translation.dart';
 import 'package:money_managment/app/modules/home/controller/home_controller.dart';
 import 'package:money_managment/app/modules/home/view/details_bottom_sheet.dart';
 import 'package:money_managment/app/modules/home/view/earning_payoff.dart';
-import 'package:money_managment/app/modules/home/view/home_page.dart';
 import 'package:money_managment/app/router/app_routes.dart';
 import '../../../../main.dart';
 import '../../../data/db/db.dart';
@@ -22,25 +22,25 @@ class OperationsCard extends GetView<HomeController> {
   @override
   Widget build(BuildContext context) {
     int remain = 0;
-    return GestureDetector (
+    return GestureDetector(
       onTapDown: (detials) {
         double start = detials.globalPosition.dx;
-        if(AppTranslation.isArabic){
+        if (AppTranslation.isArabic) {
           start = MediaQuery.of(context).size.width - start;
         }
         showMenu(
+          color: menuBackgroundColor,
           context: context,
-          position: RelativeRect.fromLTRB(
-              start, detials.globalPosition.dy, start, detials.localPosition.dy),
+          position: RelativeRect.fromLTRB(start, detials.globalPosition.dy, start, detials.localPosition.dy),
           items: [
             if ([OperationType.Outcome.name, OperationType.Income.name].contains(operation.type))
               PopupMenuItem(
                 value: 1,
-                child: Text(AppString.Details.tr),
+                child: Text(AppString.Details.tr , style: TextStyle(color: menuTextColor)),
                 onTap: () async {
                   await Future.delayed(Duration(milliseconds: 50));
                   Get.showSnackbar(GetSnackBar(
-                    message: operation.description,
+                    message: operation.description ?? AppString.noDescription.tr,
                     icon: IconButton(
                       icon: Icon(Icons.clear_rounded),
                       color: Colors.white,
@@ -52,7 +52,7 @@ class OperationsCard extends GetView<HomeController> {
             if ([OperationType.Debtor.name, OperationType.Creditor.name].contains(operation.type))
               PopupMenuItem(
                 value: 1,
-                child: Text(AppString.Details.tr),
+                child: Text(AppString.Details.tr, style: TextStyle(color: menuTextColor)),
                 onTap: () async {
                   await Future.delayed(Duration(milliseconds: 50));
                   Get.bottomSheet(DetailsBottomSheet(operation, remain));
@@ -61,15 +61,15 @@ class OperationsCard extends GetView<HomeController> {
             if ([OperationType.Outcome.name, OperationType.Income.name].contains(operation.type))
               PopupMenuItem(
                 value: 2,
-                child: Text(AppString.Edit.tr),
+                child: Text(AppString.Edit.tr, style: TextStyle(color: menuTextColor)),
                 onTap: () async {
                   await Future.delayed(const Duration(milliseconds: 50));
                   Get.toNamed(AppRoutes.addOperation, arguments: operation);
                 },
               ),
-            PopupMenuItem (
+            PopupMenuItem(
               value: 3,
-              child: Text(AppString.Delete.tr),
+              child: Text(AppString.Delete.tr, style: TextStyle(color: menuTextColor)),
               onTap: () async {
                 await Future.delayed(const Duration(milliseconds: 50));
                 Get.dialog(ConfirmOperationDialog(
@@ -85,16 +85,17 @@ class OperationsCard extends GetView<HomeController> {
             if ([OperationType.Creditor.name, OperationType.Debtor.name].contains(operation.type))
               PopupMenuItem(
                 value: 4,
-                child: Text(controller.currentPage == OperationType.Creditor.name ? AppString.Earning.tr : AppString.Payoff.tr),
+                child: Text(controller.currentPage == OperationType.Creditor.name ? AppString.Earning.tr : AppString.Payoff.tr, style: TextStyle(color: menuTextColor)),
                 onTap: () async {
                   await Future.delayed(Duration(milliseconds: 50));
-                  Get.bottomSheet(EarningPayoff(operation, remain),isScrollControlled: true);
+                  Get.bottomSheet(EarningPayoff(operation, remain), isScrollControlled: true);
                 },
               ),
           ],
         );
       },
       child: Card(
+        color: cardColor,
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Column(
@@ -105,7 +106,7 @@ class OperationsCard extends GetView<HomeController> {
                 children: [
                   Text(
                     operation.amount.withComma.toString(),
-                    style: TextStyle(fontSize: 24),
+                    style: TextStyle(fontSize: 24, color: textColor),
                   ),
                   const Spacer(),
                   if ([OperationType.Creditor.name, OperationType.Debtor.name].contains(operation.type))
@@ -116,7 +117,7 @@ class OperationsCard extends GetView<HomeController> {
                         final count = debtorCreditor.fold<int>(0, (p, v) => p + v.amount);
                         remain = operation.amount - count;
                         final remainString = AppString.remain.tr;
-                        return Text("$remainString : ${remain.withComma}");
+                        return Text("$remainString : ${remain.withComma}", style: TextStyle(color: textColor));
                       },
                     ),
                 ],
@@ -126,7 +127,7 @@ class OperationsCard extends GetView<HomeController> {
               ),
               Row(
                 children: [
-                  Text(DateFormat("yyyy/MM/dd").format(operation.date)),
+                  Text(DateFormat("yyyy/MM/dd").format(operation.date), style: TextStyle( color: textColor)),
                   const Spacer(),
                   FutureBuilder<Category>(
                     future: db.getCategory(operation.catId),
@@ -137,7 +138,7 @@ class OperationsCard extends GetView<HomeController> {
                       final category = snapshot.data;
                       return Text(
                         category!.name,
-                        style: TextStyle(fontWeight: FontWeight.bold),
+                        style: TextStyle(fontWeight: FontWeight.bold, color: textColor),
                       );
                     },
                   ),

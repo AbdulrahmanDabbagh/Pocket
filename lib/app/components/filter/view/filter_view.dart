@@ -9,6 +9,7 @@ import '../../../../main.dart';
 import '../../../core/values/app_colors.dart';
 import '../../../core/values/app_constant.dart';
 import '../../../core/values/app_strings.dart';
+import '../../../core/values/app_themes.dart';
 
 class FilterView extends StatelessWidget {
   const FilterView({Key? key, required this.filter}) : super(key: key);
@@ -18,6 +19,8 @@ class FilterView extends StatelessWidget {
   Widget build(BuildContext context) {
     final controller = Get.put(FilterController(filter));
     return Dialog(
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(AppConstant.radius)),
+      backgroundColor: filterBackgroundColor,
       child: Padding(
         padding: AppConstant.pagePadding,
         child: Column(
@@ -26,7 +29,7 @@ class FilterView extends StatelessWidget {
           children: [
             Text(
               AppString.Filter.tr,
-              style: const TextStyle(fontSize: 21, fontWeight: FontWeight.bold),
+              style: TextStyle(fontSize: 21, fontWeight: FontWeight.bold,color: textColor),
             ),
             const SizedBox(height: 10),
             Obx(() {
@@ -37,17 +40,17 @@ class FilterView extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(AppString.from.tr),
+                        Text(AppString.from.tr,style: TextStyle(color: textColor)),
                         TextButton(
                           style: ButtonStyle(
-                            backgroundColor: MaterialStateProperty.resolveWith((states) => AppColors.number3),
+                            backgroundColor: MaterialStateProperty.resolveWith((states) => textFieldFillColor),
                             shape: MaterialStateProperty.all(RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(AppConstant.radius),
-                                side: const BorderSide(color: AppColors.number3))),
+                                side: BorderSide(color: textFieldBoarderColor))),
                           ),
                           child: Center(
                             child: Text(DateFormat('yyyy-MM-dd').format(controller.fromDate.value),
-                                style: const TextStyle(color: AppColors.white)),
+                                style: TextStyle(color: textFieldHintStyle)),
                           ),
                           onPressed: () async {
                             final date = await showDatePicker(
@@ -68,17 +71,17 @@ class FilterView extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(AppString.to.tr),
+                        Text(AppString.to.tr,style: TextStyle(color: textColor)),
                         TextButton(
                           style: ButtonStyle(
-                            backgroundColor: MaterialStateProperty.resolveWith((states) => AppColors.number3),
+                            backgroundColor: MaterialStateProperty.resolveWith((states) => textFieldFillColor),
                             shape: MaterialStateProperty.all(RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(AppConstant.radius),
-                                side: const BorderSide(color: AppColors.number3))),
+                                side: BorderSide(color: textFieldBoarderColor))),
                           ),
                           child: Center(
                             child: Text(DateFormat('yyyy-MM-dd').format(controller.endDate.value),
-                                style: const TextStyle(color: AppColors.white)),
+                                style: TextStyle(color: textFieldHintStyle)),
                           ),
                           onPressed: () async {
                             final date = await showDatePicker(
@@ -100,9 +103,9 @@ class FilterView extends StatelessWidget {
             const SizedBox(
               height: AppConstant.paddingValue,
             ),
-            const Text(
-              "Select types",
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            Text(
+              AppString.selectAType.tr,
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold,color: textColor),
             ),
             const SizedBox(
               height: AppConstant.paddingValue / 2,
@@ -123,9 +126,9 @@ class FilterView extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   if (controller.selectedTypes.isNotEmpty)
-                    const Text(
-                      "Select categories",
-                      style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                    Text(
+                      AppString.selectACategory.tr,
+                      style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold , color: textColor),
                     ),
                   if (controller.selectedTypes.isNotEmpty)
                     const SizedBox(
@@ -142,12 +145,13 @@ class FilterView extends StatelessWidget {
                             return Obx(() {
                               final isSelected = controller.selectedCategories.any((element) => element == e);
                               return ChoiceChip(
+                                backgroundColor: chipsBackgroundColor,
                                 label: Text(
                                   e.name,
-                                  style: TextStyle(color: isSelected ? AppColors.white : null),
+                                  style: TextStyle(color: isSelected ? chipsTextSelectedColor : chipsTextUnselectedColor),
                                 ),
                                 selected: isSelected,
-                                selectedColor: AppColors.number3,
+                                selectedColor: chipSelectedColor,
                                 materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
                                 onSelected: (a) {
                                   if (isSelected) {
@@ -176,8 +180,8 @@ class FilterView extends StatelessWidget {
                       Get.back();
                     },
                     style: ElevatedButton.styleFrom(
-                        primary: AppColors.white, shadowColor: Colors.transparent, onPrimary: AppColors.blue, elevation: 0),
-                    child: Text(AppString.Cancel.tr),
+                        primary: textFieldFillColor, shadowColor: Colors.transparent, onPrimary: AppColors.blue, elevation: 0),
+                    child: Text(AppString.Cancel.tr,style: TextStyle(color: textFieldHintStyle)),
                   ),
                 ),
                 const SizedBox(width: 10),
@@ -206,12 +210,13 @@ class FilterView extends StatelessWidget {
     return Obx(() {
       final isSelected = controller.selectedTypes.any((element) => element == type);
       return ChoiceChip(
+        backgroundColor: chipsBackgroundColor,
         label: Text(
           type.name.tr,
-          style: TextStyle(color: isSelected ? AppColors.white : null),
+          style: TextStyle(color: isSelected ? chipsTextSelectedColor : chipsTextUnselectedColor),
         ),
         selected: isSelected,
-        selectedColor: AppColors.number3,
+        selectedColor: chipSelectedColor,
         materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
         onSelected: (a) {
           if (isSelected) {

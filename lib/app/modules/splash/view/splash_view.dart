@@ -9,7 +9,7 @@ class SplashView extends GetView<SplashController>{
 
   @override
   Widget build(BuildContext context) {
-    controller.onInit();
+    controller;
     return const Scaffold(
       body: Center(
         child: FlutterLogo(),

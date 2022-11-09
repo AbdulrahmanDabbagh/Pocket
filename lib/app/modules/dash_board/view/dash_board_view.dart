@@ -22,11 +22,11 @@ class DashBoardView extends GetView<DashBoardController> {
       backgroundColor: Colors.transparent,
       body: Obx(() {
         return ListView(
-          padding: AppConstant.pagePadding,
+          padding: AppConstant.pagePadding.copyWith(bottom: 80),
           children: [
             RectCard(
-                subtitle1: "${AppString.TotalCash.tr} ",
-                subtitle2: "${AppString.Budget.tr} ",
+                subtitle1: AppString.TotalCash.tr,
+                subtitle2: AppString.Budget.tr,
                 amount1: controller.totalCash,
                 amount2: controller.totalBudge),
             const SizedBox(height: AppConstant.paddingValue),
@@ -85,7 +85,7 @@ class DashBoardView extends GetView<DashBoardController> {
                   }),
             ),
             const SizedBox(height: AppConstant.paddingValue),
-            if (controller.incomes.isNotEmpty)
+            if (controller.outcomes.isNotEmpty)
               BarChartWidget(operations: controller.outcomes, title: OperationType.Outcome.name.tr),
             const SizedBox(height: AppConstant.paddingValue),
             if (controller.incomes.isNotEmpty)
@@ -95,14 +95,14 @@ class DashBoardView extends GetView<DashBoardController> {
           ],
         );
       }),
-      floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            controller.filterButton();
-          },
-        backgroundColor: AppColors.number2,
-        child:
-        const Icon(Icons.filter_list , color: AppColors.white),
-      ),
+      // floatingActionButton: FloatingActionButton(
+      //     onPressed: () {
+      //       controller.filterButton();
+      //     },
+      //   backgroundColor: AppColors.number2,
+      //   child:
+      //   const Icon(Icons.filter_list , color: AppColors.white),
+      // ),
     );
   }
 }

@@ -9,4 +9,5 @@ class AppRoutes{
   static const futureGoal = "/future_goal";
   static const profile = "/profile";
   static const addFutureGoal = "/add_future_goal";
+  static const onboardingPage = "/onboarding_page";
 }

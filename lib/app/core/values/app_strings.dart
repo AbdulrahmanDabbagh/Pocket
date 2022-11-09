@@ -56,9 +56,22 @@ class AppString{
   static const profile = "Profile";
   static const futureGoals = "Future goals";
   static const doIt = "Do it";
-
   static const theme = "Theme";
-
   static const noDescription = "noDescription";
+  static const skip = "skip";
+  static const next = "next";
+  static const doYouWantToAddPassword = "doYouWantToAddPassword";
+  static const doYouWantToDeletePassword = "doYouWantToDeletePassword";
+  static const save = "save";
+  static const yes = "yes";
+  static const no = "no";
+  static const welcome = "welcome";
+  static const welcomeToOurApplication = "welcomeToOurApplication";
+  static const budget = "budget";
+  static const addYourCurrentBudget = "addYourCurrentBudget";
+  static const selectTypes = "selectTypes";
+  static const selectCategories = "selectCategories";
+
+  static const intro = "intro";
 
 }

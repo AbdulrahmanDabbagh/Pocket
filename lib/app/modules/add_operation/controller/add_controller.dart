@@ -13,7 +13,7 @@ class AddController extends GetxController {
 
   final addForm = GlobalKey<FormState>();
   late String amount = (operation?.amount ?? "").toString();
-  late String description = operation?.description ?? "";
+  late String? description = operation?.description;
   late Rx<String> type = Rx(operation?.type ?? OperationType.Outcome.name);
 
   @override

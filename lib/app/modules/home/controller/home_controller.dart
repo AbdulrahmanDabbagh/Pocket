@@ -16,9 +16,9 @@ class HomeController extends GetxController{
   late int amount;
   final addForm = GlobalKey<FormState>();
   bool? delete;
-  var selectedPos = 0.obs ;
+  var selectedPos = 1.obs ;
 
-  final CircularBottomNavigationController navigationController = CircularBottomNavigationController(0);
+  final CircularBottomNavigationController navigationController = CircularBottomNavigationController(1);
 
 
   searchButton(){

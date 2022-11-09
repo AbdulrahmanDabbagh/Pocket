@@ -1,71 +1,60 @@
 import 'package:flutter/material.dart';
-
+import 'package:flutter/services.dart';
 import 'package:flutter_screen_lock/flutter_screen_lock.dart';
 import 'package:get/get.dart';
-import 'package:money_managment/app/core/utils/app_storage.dart';
-import 'package:money_managment/app/core/values/app_colors.dart';
-import 'package:money_managment/app/core/values/app_themes.dart';
-import 'package:money_managment/app/modules/profile/view/theme_bottom_sheet.dart';
 
-import '../../../core/values/app_constant.dart';
-import '../../../core/values/app_strings.dart';
-import '../../../core/values/translation/app_translation.dart';
-import '../controller/profile_controller.dart';
+import '../../../../core/utils/app_storage.dart';
+import '../../../../core/values/app_colors.dart';
+import '../../../../core/values/app_constant.dart';
+import '../../../../core/values/app_strings.dart';
+import '../../controller/onboarding_page_controller.dart';
 
-class ProfileView extends GetView<ProfileController> {
-  ProfileView({Key? key}) : super(key: key);
-
-  final controller = Get.put(ProfileController());
+class BuildPagePassword extends GetView<OnboardingPageController> {
+  const BuildPagePassword({required this.color, required this.urlImage, required this.title, required this.subtitle, Key? key})
+      : super(key: key);
+  final bool textFormField = false;
+  final Color color;
+  final String urlImage;
+  final String title;
+  final String subtitle;
 
   @override
   Widget build(BuildContext context) {
     return Form(
       key: controller.addForm,
-      child: Padding(
-        padding: AppConstant.pagePadding,
-        child: Scaffold(
-          backgroundColor: Colors.transparent,
-          body: Column(
-            children: [
-              ElevatedButton(
-                  onPressed: () {
-                    Get.bottomSheet(ThemeBottomSheet());
-                  },
-                  style: ElevatedButton.styleFrom(
-                      padding: AppConstant.pagePadding, onPrimary: profileTextColor, primary: profileButton),
-                  child: Row(
-                    children: [
-                      Icon(Icons.sunny),
-                      const SizedBox(
-                        width: 10,
-                      ),
-                      Text(
-                        AppString.theme.tr,
-                        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
-                      )
-                    ],
-                  )),
-              const SizedBox(height: AppConstant.paddingValue),
-              ElevatedButton(
-                  onPressed: () {
-                    final locale = AppTranslation.isArabic ? AppTranslation.englishLocale : AppTranslation.arabicLocale;
-                    Get.locale = locale;
-                    AppTranslation.saveLocale(locale);
-                    Get.forceAppUpdate();
-                  },
-                  style: ElevatedButton.styleFrom(
-                      padding: AppConstant.pagePadding, onPrimary: profileTextColor, primary: profileButton),
-                  child: Row(
-                    children: [
-                      Icon(Icons.language),
-                      const SizedBox(
-                        width: 10,
-                      ),
-                      Text(AppString.Language.tr, style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16))
-                    ],
-                  )),
-              const SizedBox(height: AppConstant.paddingValue),
-              ElevatedButton(
+      child: Container(
+        color: color,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Image.asset(
+              urlImage,
+              fit: BoxFit.cover,
+              width: double.infinity,
+            ),
+            const SizedBox(
+              height: 64,
+            ),
+            Text(
+              title,
+              style: TextStyle(color: AppColors.blue, fontWeight: FontWeight.bold, fontSize: 32),
+            ),
+            const SizedBox(
+              height: 24,
+            ),
+            Container(
+              padding: const EdgeInsets.symmetric(),
+              child: Text(
+                subtitle,
+                style: const TextStyle(color: AppColors.number2),
+              ),
+            ),
+            const SizedBox(
+              height: 24,
+            ),
+            Padding(
+              padding: AppConstant.pagePadding,
+              child: ElevatedButton(
                 onPressed: () {
                   if (AppStorage().read(AppStorage.hasPassword) == true) {
                     Get.dialog(Dialog(
@@ -186,6 +175,7 @@ class ProfileView extends GetView<ProfileController> {
                                         //             if (controller.addForm.currentState!.validate()) {
                                         //               AppStorage().write(AppStorage.hasPassword, true);
                                         //               AppStorage().write(AppStorage.pinCode, controller.password);
+                                        //               print("ttttttttttttt");
                                         //               AppStorage().write(AppStorage.digits, controller.password.toString().length);
                                         //               Get.back();
                                         //             }
@@ -215,8 +205,8 @@ class ProfileView extends GetView<ProfileController> {
                     ));
                   }
                 },
-                style: ElevatedButton.styleFrom(
-                    padding: AppConstant.pagePadding, onPrimary: profileTextColor, primary: profileButton),
+                style:
+                    ElevatedButton.styleFrom(padding: AppConstant.pagePadding, onPrimary: AppColors.blue, primary: AppColors.white),
                 child: Row(
                   children: [
                     Icon(Icons.password),
@@ -227,8 +217,8 @@ class ProfileView extends GetView<ProfileController> {
                   ],
                 ),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:get/get.dart';
 import 'package:money_managment/app/components/filter/view/filter_view.dart';
 import 'package:money_managment/app/core/enum/type_enum.dart';
@@ -11,6 +13,7 @@ class DashBoardController extends GetxController{
 
   final operations = <Operation>[].obs;
   Filter filter = Filter();
+  StreamSubscription? listener;
 
   num total(OperationType operationType){
     final incomeOperations = operations.where((e) => e.type == operationType.name).toList();
@@ -34,13 +37,17 @@ class DashBoardController extends GetxController{
    return operations.where((e) => e.type == OperationType.Income.name).toList();
   }
 
-  getOperations() async {
-    operations.assignAll(await db.filterOperations(filter));
+  getOperations(){
+    if(listener != null){
+      listener!.cancel();
+    }
+    listener = db.watchFilterOperations(filter).listen(operations);
   }
 
   @override
   onInit(){
     super.onInit();
+    db.watchFilterOperations(filter).listen(operations);
     getOperations();
   }
 
@@ -53,4 +60,10 @@ class DashBoardController extends GetxController{
   }
 
   final touchedIndex = (-1).obs;
+
+  @override
+  void onClose() {
+    listener!.cancel();
+    super.onClose();
+  }
 }
