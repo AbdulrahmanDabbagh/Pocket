@@ -16,6 +16,12 @@ class AppTheme{
 
 
   ThemeData currentTheme = AppThemeMode().themeMode[AppStorage().read(AppStorage.currentTheme)] ?? AppThemeMode().themeMode["Theme mode 1"]!;
+  AppTheme()
+  {
+    if(AppStorage().read(AppStorage.currentTheme)==null) {
+      AppStorage().write(AppStorage.currentTheme, "Theme mode 1");
+    }
+  }
 }
 
 Color get cardColor => AppStorage().read(AppStorage.currentTheme) == "Theme mode 1"? AppColors.white:AppColors.blackWithOpacity;

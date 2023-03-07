@@ -64,4 +64,5 @@ final enUS = <String, String>{
   AppString.welcomeToOurApplication : "Welcome to our application , press Next to start using app",
   AppString.selectTypes : "Select types",
   AppString.selectCategories : "Select categories",
+  AppString.youDoNotHaveEnoughMoney : "You don't have enough money",
 };

@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:money_managment/app/core/enum/type_enum.dart';
 import 'package:money_managment/app/data/db/db.dart';
+import 'package:money_managment/app/modules/dash_board/controller/dash_board_controller.dart';
 import 'package:money_managment/app/modules/home/controller/home_controller.dart';
 
 import '../../../../main.dart';
@@ -20,6 +21,7 @@ class EarningPayoff extends GetView<HomeController> {
 
   @override
   Widget build(BuildContext context) {
+    final dashboardController = Get.put(DashBoardController());
     return Form(
       key: controller.addForm,
       child: BottomSheet(
@@ -57,6 +59,10 @@ class EarningPayoff extends GetView<HomeController> {
                     }
                     if (int.parse(value) > remain) {
                       return AppString.invalidAmount.tr;
+                    }
+                    if(int.parse(value) >= dashboardController.totalCash && operation.type == OperationType.Debtor.name)
+                    {
+                      return AppString.youDoNotHaveEnoughMoney.tr;
                     }
                     return null;
                   },

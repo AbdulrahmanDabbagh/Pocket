@@ -2,11 +2,14 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_screen_lock/flutter_screen_lock.dart';
 import 'package:get/get.dart';
+import 'package:money_managment/app/components/confirm_operation_dialog.dart';
 import 'package:money_managment/app/core/utils/app_storage.dart';
 import 'package:money_managment/app/core/values/app_colors.dart';
 import 'package:money_managment/app/core/values/app_themes.dart';
 import 'package:money_managment/app/modules/profile/view/theme_bottom_sheet.dart';
+import 'package:money_managment/app/modules/splash/controller/splash_controller.dart';
 
+import '../../../../main.dart';
 import '../../../core/values/app_constant.dart';
 import '../../../core/values/app_strings.dart';
 import '../../../core/values/translation/app_translation.dart';
@@ -16,7 +19,7 @@ class ProfileView extends GetView<ProfileController> {
   ProfileView({Key? key}) : super(key: key);
 
   final controller = Get.put(ProfileController());
-
+  final splashController = Get.put(SplashController());
   @override
   Widget build(BuildContext context) {
     return Form(
@@ -126,7 +129,7 @@ class ProfileView extends GetView<ProfileController> {
                                           digits: 6,
                                           canCancel: true,
                                           confirmation: true,
-                                          didConfirmed: (value){
+                                          didConfirmed: (value) {
                                             AppStorage().write(AppStorage.hasPassword, true);
                                             AppStorage().write(AppStorage.pinCode, value);
                                             AppStorage().write(AppStorage.digits, 6);
@@ -227,6 +230,70 @@ class ProfileView extends GetView<ProfileController> {
                   ],
                 ),
               ),
+              const SizedBox(height: AppConstant.paddingValue),
+              ElevatedButton(
+                  onPressed: () {
+                    Get.dialog(ConfirmOperationDialog(
+                        onConfirm: () {
+                          if (AppStorage().read(AppStorage.hasPassword) == true) {
+                            screenLock(
+                              context: Get.overlayContext!,
+                              correctString: AppStorage().read(AppStorage.pinCode),
+                              digits: AppStorage().read(AppStorage.digits),
+                              canCancel: true,
+                              // confirmation: true,
+                              // didConfirmed: (value){
+                              //   db.deleteAllCategoriesRow();
+                              //   db.deleteAllDebtorAndCreditorRow();
+                              //   db.deleteAllFutureGoalsRow();
+                              //   db.deleteAllOperationRow();
+                              //   Get.back();
+                              //   Get.forceAppUpdate();
+                              // },
+                              customizedButtonChild: Icon(
+                                Icons.fingerprint,
+                              ),
+                              customizedButtonTap: () async {
+                                print("customizedButtonTap");
+                                if (await splashController.localAuth(Get.overlayContext!)) {
+                                  db.deleteAllCategoriesRow();
+                                  db.deleteAllDebtorAndCreditorRow();
+                                  db.deleteAllFutureGoalsRow();
+                                  db.deleteAllOperationRow();
+                                  Get.back();
+                                  Get.forceAppUpdate();
+                                  Get.back();
+                                }
+                              },
+                              // didOpened: () async {
+                              //   print("didOpened");
+                              //   await localAuth(Get.overlayContext!);
+                              // },
+                            );
+                          } else
+                            {
+                              db.deleteAllCategoriesRow();
+                              db.deleteAllDebtorAndCreditorRow();
+                              db.deleteAllFutureGoalsRow();
+                              db.deleteAllOperationRow();
+                              Get.back();
+                              Get.forceAppUpdate();
+                            }
+
+                        },
+                        confirmText: "are you sure you want to delete all data"));
+                  },
+                  style: ElevatedButton.styleFrom(
+                      padding: AppConstant.pagePadding, onPrimary: profileTextColor, primary: profileButton),
+                  child: Row(
+                    children: [
+                      Icon(Icons.delete_forever_outlined),
+                      const SizedBox(
+                        width: 10,
+                      ),
+                      Text("Delete", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16))
+                    ],
+                  )),
             ],
           ),
         ),

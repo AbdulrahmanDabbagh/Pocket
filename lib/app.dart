@@ -20,8 +20,7 @@ class App extends StatelessWidget {
       translationsKeys: AppTranslation().keys,
       locale: AppTranslation.currentLocale,
       theme: AppTheme().currentTheme,
-      darkTheme: AppTheme.darkTheme,
-      themeMode: AppTheme.isDark?ThemeMode.dark:ThemeMode.light,
+      // themeMode: AppTheme.isDark?ThemeMode.dark:ThemeMode.light,
       debugShowCheckedModeBanner: false,
       // builder: (context, child){
       //   return Container(

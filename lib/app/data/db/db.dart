@@ -35,7 +35,30 @@ class MyDatabase extends _$MyDatabase {
   Future<int> removeOperation(Operation operation) => delete(operations).delete(operation);
   Future<int> removeCategory(Category category) => delete(categories).delete(category);
   Future<int> removeFutureGoal(FutureGoal futureGoal) => delete(futureGoals).delete(futureGoal);
-
+  deleteAllCategoriesRow() async{
+  const query = """
+    delete from categories
+    """;
+  await customSelect(query).get();
+  }
+  deleteAllDebtorAndCreditorRow() async{
+    const query = """
+    delete from debtorAndCreditors
+    """;
+    await customSelect(query).get();
+  }
+  deleteAllFutureGoalsRow() async{
+    const query = """
+    delete from futureGoals
+    """;
+    await customSelect(query).get();
+  }
+  deleteAllOperationRow() async{
+    const query = """
+    delete from operations
+    """;
+    await customSelect(query).get();
+  }
   Future<bool> editOperation(Operation operation) => update(operations).replace(operation);
   Future<bool> editCategory(Category category) => update(categories).replace(category);
   Future<bool> editFutureGoal(FutureGoal futureGoal) => update(futureGoals).replace(futureGoal);
@@ -127,6 +150,7 @@ class MyDatabase extends _$MyDatabase {
     // });
     return (select(categories)..where((tbl) => tbl.id.equals(id))).getSingle();
   }
+
 
 
   // you should bump this number whenever you change or add_operation a table definition.

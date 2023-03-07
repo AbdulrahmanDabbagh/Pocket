@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:money_managment/app.dart';
 import 'package:money_managment/app/core/values/app_colors.dart';
 import 'package:money_managment/app/core/values/app_constant.dart';
 import 'package:money_managment/app/core/values/app_strings.dart';
@@ -13,6 +12,7 @@ import '../../../core/enum/type_enum.dart';
 import '../../../core/utils/background_image.dart';
 import '../../../core/values/app_themes.dart';
 import '../../../data/db/db.dart';
+import '../../dash_board/controller/dash_board_controller.dart';
 import '../controller/add_controller.dart';
 
 class AddView extends GetView<AddController> {
@@ -20,6 +20,7 @@ class AddView extends GetView<AddController> {
 
   @override
   Widget build(BuildContext context) {
+    final dashboardController = Get.put(DashBoardController());
     return Scaffold(
       appBar: AppBar(
         title: Text(AppString.addOperation.tr),
@@ -61,6 +62,12 @@ class AddView extends GetView<AddController> {
                     if (value == null || value.isEmpty) {
                       return AppString.required.tr;
                     }
+                    if(int.parse(value) >= dashboardController.totalCash &&
+                        (controller.type.value == OperationType.Outcome.name
+                            || controller.type.value == OperationType.Creditor.name))
+                      {
+                        return AppString.youDoNotHaveEnoughMoney.tr;
+                      }
                     return null;
                   },
                 ),

@@ -64,5 +64,5 @@ final arSY = <String, String>{
   AppString.welcomeToOurApplication : "مرحبا بك في تطبيقنا , اضغط التالي لبدء استخدام التطبيق",
   AppString.selectTypes : "اختر النوع",
   AppString.selectCategories : "اختر الصنف",
-
+  AppString.youDoNotHaveEnoughMoney : "ليس لديك رصيد كافي",
 };

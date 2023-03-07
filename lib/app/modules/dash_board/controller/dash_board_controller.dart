@@ -12,21 +12,33 @@ import '../../../router/app_routes.dart';
 class DashBoardController extends GetxController{
 
   final operations = <Operation>[].obs;
+  final debtorAndCreditor = <DebtorAndCreditor>[].obs;
   Filter filter = Filter();
   StreamSubscription? listener;
-
+  int? totalDebtorPaid;
+  int? totalCreditorEarn;
+  Future<int?> get getTotalDebtorPaid async{
+    totalDebtorPaid = await db.getTotalPaidDebtor() ?? 0;
+    return null;
+  }
+  Future<int?> get getTotalCreditorEarn async{
+    totalCreditorEarn = await db.getTotalEarnCreditor() ?? 0;
+    return null;
+  }
   num total(OperationType operationType){
     final incomeOperations = operations.where((e) => e.type == operationType.name).toList();
     return incomeOperations.fold<int>(0,(value, element) => value + element.amount);
   }
-
   num get totalCash {
-   final result = (total(OperationType.Income) + total(OperationType.Debtor)) - (total(OperationType.Outcome) + total(OperationType.Creditor));
+    getTotalDebtorPaid;
+    getTotalCreditorEarn;
+   final result = (total(OperationType.Income) + total(OperationType.Debtor) + totalCreditorEarn!)
+       - (total(OperationType.Outcome) + total(OperationType.Creditor) + totalDebtorPaid!);
    return result < 0?0:result;
   }
 
   num get totalBudge {
-   return (total(OperationType.Income) + total(OperationType.Creditor)) - (total(OperationType.Outcome) + total(OperationType.Debtor));
+    return totalCash -(total(OperationType.Debtor) - totalDebtorPaid! )+ (total(OperationType.Creditor) - totalCreditorEarn!);
   }
 
   List<Operation> get outcomes {

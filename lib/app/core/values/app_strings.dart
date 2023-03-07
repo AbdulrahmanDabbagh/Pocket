@@ -71,6 +71,7 @@ class AppString{
   static const addYourCurrentBudget = "addYourCurrentBudget";
   static const selectTypes = "selectTypes";
   static const selectCategories = "selectCategories";
+  static const youDoNotHaveEnoughMoney = "youDoNotHaveEnoughMoney";
 
   static const intro = "intro";
 
